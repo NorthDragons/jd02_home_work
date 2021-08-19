@@ -32,4 +32,4 @@
 </br>
 <p>Уже зарегистрированы?</p>
             <button
-            onclick="window.location.href = 'http://localhost:8080/Mk-JD2-82-21-0.0.0-SNAPSHOT/login';">Войти</button>
+            onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/login';">Войти</button>
