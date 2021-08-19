@@ -2,6 +2,13 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ">
+<title>Квиз</title>
+</head>
+<body>
+<form action="/home_work_4-1.0-SNAPSHOT/registration" method="POST">
 
 <table style="background-color: #ECE5B6;" width="30%" >
 <caption style="background-color: #ECE5B6;" width="50%"><b>Регистрация</b></caption>
@@ -22,13 +29,18 @@
       </tr>
      <tr>
        	     <th width="50%">Отчество</TH>
-       		 <td width="50%"><input type="text" name="MiddleName"></TD>
+       		 <td width="50%"><input type="text" name="middleName"></TD>
      </tr>
+     <tr>
+            	     <th width="50%">День рождения</TH>
+            		 <td width="50%"><input type="text" name="birthday"></TD>
+          </tr>
   	 <tr>
   	 <th></th>
 		  <td width="50%"><input type="submit" value="submit"></TD>
 	 </tr>
 </table>
+</form>
 </br>
 <p>Уже зарегистрированы?</p>
             <button

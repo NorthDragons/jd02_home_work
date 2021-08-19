@@ -1,5 +1,5 @@
-package by.it_academy.home_work4.controllers.web.filters;//package by.it_academy.home_work3.controllers.web.filters;/* created by Kaminskii Ivan
-
+package controllers.web.filters;/* created by Kaminskii Ivan
+*/
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
