@@ -9,6 +9,6 @@
      onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/login';">Войти</button> </br>
 
     <button width="50%" style="background-color: #A9A9A9;"
-     onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/registration';">Зарегистрироваться</button>
+     onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/reg';">Зарегистрироваться</button>
 
     </body>

@@ -34,5 +34,5 @@
 </form>
 <p>Не прошли регистрацию?</p>
             <button
-            onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/mailreg';">Зарегистрироваться</button>
+            onclick="window.location.href = 'http://localhost:8080/home_work_4-1.0-SNAPSHOT/reg';">Зарегистрироваться</button>
 </br>

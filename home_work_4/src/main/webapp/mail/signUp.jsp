@@ -17,7 +17,7 @@
 	  </tr>
       <tr>
 	     <th width="50%">Password</TH>
-	  	 <td width="50%"><input type="text" name="password"></TD>
+	  	 <td width="50%"><input type="text" name="password" required></TD>
 	  </tr>
 	  <tr>
            	     <th width="50%">Имя</TH>

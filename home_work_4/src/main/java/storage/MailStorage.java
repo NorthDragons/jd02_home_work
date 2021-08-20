@@ -1,7 +1,6 @@
 package storage;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,16 +12,22 @@ public class MailStorage {
     private final Map<String, String> users;
     private final Map<String, String> firstName;
     private final Map<String, String> lastName;
-    private final Map<String, ZonedDateTime> birthday;
+    private final Map<String, String> middleName;
+
+    private final Map<String, String> birthday;
 
 
     private MailStorage() {
         this.massages = new HashMap<>();
         this.users = new HashMap<>();
-        this.firstName=new HashMap<>();
-        this.lastName=new HashMap<>();
-        this.birthday =new HashMap<>();
+        this.firstName = new HashMap<>();
+        this.lastName = new HashMap<>();
+        this.birthday = new HashMap<>();
+        this.middleName = new HashMap<>();
+    }
 
+    public Map<String, String> getMiddleName() {
+        return middleName;
     }
 
     public Map<String, Integer> getMassages() {
@@ -41,7 +46,7 @@ public class MailStorage {
         return lastName;
     }
 
-    public Map<String, ZonedDateTime> getBirthday() {
+    public Map<String, String> getBirthday() {
         return birthday;
     }
 

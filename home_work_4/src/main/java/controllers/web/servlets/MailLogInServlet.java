@@ -1,4 +1,4 @@
-package by.it_academy.home_work4.controllers.web.servlets;/* created by Kaminskii Ivan
+package controllers.web.servlets;/* created by Kaminskii Ivan
  */
 
 import javax.servlet.ServletException;

@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.ZonedDateTime;
-import java.util.Date;
 
-@WebServlet(name = ("MailRegServlet"), urlPatterns = ("/registration"))
+@WebServlet(name = ("MailRegServlet"), urlPatterns = ("/reg"))
 public class MailRegServlet extends HttpServlet {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final String FIRST_NAME = "firstName";
     private static final String LAST_NAME = "lastName";
+    private static final String MIDDLE_NAME = "middleName";
     private static final String BIRTHDAY = "birthday";
 
-    private final MailService service;
+    private final MailService instance;
 
     public MailRegServlet() {
-        service = MailService.getInstance();
+        instance = MailService.getInstance();
     }
 
 
@@ -42,16 +41,13 @@ public class MailRegServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD);
         String firstName = req.getParameter(FIRST_NAME);
         String lastName = req.getParameter(LAST_NAME);
-        ZonedDateTime birthday = ZonedDateTime.parse(req.getParameter(BIRTHDAY));
+        String middleName = req.getParameter(MIDDLE_NAME);
+        String birthday = req.getParameter(BIRTHDAY);
 
 
-        service.addUsers(login, password,firstName,lastName,birthday);
+        instance.addUsers(login, password, firstName, lastName, middleName, birthday);
 
         PrintWriter writer = resp.getWriter();
         writer.write(login);
-    }
-
-    public MailService getService() {
-        return service;
     }
 }
