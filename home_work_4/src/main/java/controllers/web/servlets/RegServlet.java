@@ -1,6 +1,7 @@
 package controllers.web.servlets;/* created by Kaminskii Ivan
  */
 
+import model.UserDto;
 import service.MailService;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = ("MailRegServlet"), urlPatterns = ("/reg"))
 public class MailRegServlet extends HttpServlet {
@@ -20,10 +20,10 @@ public class MailRegServlet extends HttpServlet {
     private static final String MIDDLE_NAME = "middleName";
     private static final String BIRTHDAY = "birthday";
 
-    private final MailService instance;
+    private final MailService mailService;
 
     public MailRegServlet() {
-        instance = MailService.getInstance();
+        mailService = MailService.getInstance();
     }
 
 
@@ -44,10 +44,15 @@ public class MailRegServlet extends HttpServlet {
         String middleName = req.getParameter(MIDDLE_NAME);
         String birthday = req.getParameter(BIRTHDAY);
 
+        UserDto userDto = new UserDto(login, password, firstName, lastName, middleName, birthday);
 
-        instance.addUsers(login, password, firstName, lastName, middleName, birthday);
+        this.mailService.signUp(userDto);
+        req.getSession().setAttribute("user", userDto);
+        resp.sendRedirect(req.getContextPath() + "/hello");
 
-        PrintWriter writer = resp.getWriter();
-        writer.write(login);
+    }
+
+    public MailService getMailService() {
+        return mailService;
     }
 }
