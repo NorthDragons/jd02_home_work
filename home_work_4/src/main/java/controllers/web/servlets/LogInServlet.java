@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "login", urlPatterns="/login")
-public class MailInServlet extends HttpServlet {
+@WebServlet(name = "login", urlPatterns = "/login")
+public class LogInServlet extends HttpServlet {
     private final MailInService mailInService;
 
-    public MailInServlet() {
+    public LogInServlet() {
         this.mailInService = MailInService.getInstance();
     }
 
@@ -28,18 +28,14 @@ public class MailInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        UserDto user = mailInService.authentication(login,password);
-        if(user==null){
-        throw new IllegalAccessError("неверный логин или пароль");
-        }
-        else {
+        UserDto user = mailInService.authentication(login, password);
+        if (user == null) {
+            throw new IllegalAccessError("неверный логин или пароль");
+        } else {
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/hello");
         }
 
     }
 
-    public MailInService getMailInService() {
-        return mailInService;
-    }
 }

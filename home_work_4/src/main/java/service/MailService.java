@@ -1,31 +1,33 @@
 package service;/* created by Kaminskii Ivan
  */
 
-import storage.MailStorage;
+import model.UserDto;
+import storage.UserStorage;
 
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.Collection;
 
 public class MailService {
     private final static MailService instance = new MailService();
-    private final MailStorage storage;
+    private final UserStorage storage;
 
 
     public MailService() {
-        this.storage = MailStorage.getInstance();
+        this.storage = UserStorage.getInstance();
     }
 
-    public void addUsers(String login, String password, String firstName,
-                         String lastName,String middleName, String birthday) {
-        this.storage.getUsers().putIfAbsent(login, password);
-        this.storage.getBirthday().putIfAbsent(login, birthday);
-        this.storage.getFirstName().putIfAbsent(login, firstName);
-        this.storage.getLastName().putIfAbsent(login, lastName);
-        this.storage.getMiddleName().putIfAbsent(login,middleName);
+    public Collection<UserDto> getAll() {
+        return this.storage.getAll();
     }
 
-    public Map<String, String> getUsersResult() {
-        return this.storage.getUsers();
+    public void signUp(UserDto user) {
+        user.setRegistration(LocalDate.now());
+        this.storage.add(user);
     }
+    public UserDto get(String login) {
+        return this.storage.get(login);
+    }
+
 
     public static MailService getInstance() {
         return instance;

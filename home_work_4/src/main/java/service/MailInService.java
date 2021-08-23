@@ -5,10 +5,11 @@ import model.UserDto;
 
 import java.util.Objects;
 
-public class MilInService {
+public class MailInService {
+    private final static MailInService instance = new MailInService();
    private final MailService mailService;
 
-    public MilInService(MailService mailService) {
+    public MailInService() {
         this.mailService = MailService.getInstance();
     }
 
@@ -24,5 +25,8 @@ public class MilInService {
         }
 
         return user;
+    }
+    public static MailInService getInstance(){
+        return instance;
     }
 }

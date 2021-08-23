@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = ("MailRegServlet"), urlPatterns = ("/reg"))
-public class MailRegServlet extends HttpServlet {
+public class RegServlet extends HttpServlet {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final String FIRST_NAME = "firstName";
@@ -22,7 +22,7 @@ public class MailRegServlet extends HttpServlet {
 
     private final MailService mailService;
 
-    public MailRegServlet() {
+    public RegServlet() {
         mailService = MailService.getInstance();
     }
 
@@ -52,7 +52,4 @@ public class MailRegServlet extends HttpServlet {
 
     }
 
-    public MailService getMailService() {
-        return mailService;
-    }
 }
