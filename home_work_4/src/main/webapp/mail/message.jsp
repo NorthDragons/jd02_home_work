@@ -1,29 +1,34 @@
 <%@ page language="java"
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <html lang="ru">
 
 <head>
-  <meta charset="utf-8">
-  <title>Новое Сообщение</title>
- </head>
+ <meta charset="utf-8" />
+ <title>Главная</title>
+</head>
+
+<body>
 
  <table border="1" align="center" rules="rows" style="width:60%;">
-     <body bgcolor="">
-     <tr> <td>
-     <table border="1" background="images/168.png" bgcolor="" cellpadding="10" style="width:100%; border-radius:5px;">
-     <tr><th>
-<form action="${pageContext.request.contextPath}/" method="POST">
-  <p><b>Получатель:</b><br>
-   <input type="text" size="40" name="user" required placeholder="Введите получателя">
-  </p>
+ <tr> <td>
 
-  <p>Сообщение<Br>
-   <textarea name="comment" required placeholder="Введите получателя" cols="40" rows="3"></textarea></p>
+<table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
+<tr><td rowspan="2" style="width:80%">
+<h2>Новое Сообщение</h2>
+
+<form action="${pageContext.request.contextPath}/message" method="POST">
+  <p><b>Получатель:</b><br>
+   <input type="recipient" size="39" name="user" required placeholder="Введите получателя"></p>
+  <p><b>Сообщение:</b><Br>
+   <textarea name="message" required placeholder="Введите получателя" cols="41" rows="3"></textarea></p>
   <p><input type="submit" value="Отправить">
    <input type="reset" value="Очистить"></p>
  </form>
- </th></tr>
- </table>
- </td></tr>
- </body>
- <table>
+
+</td></tr>
+</table>
+
+</td></tr>
+</table>
+</body>

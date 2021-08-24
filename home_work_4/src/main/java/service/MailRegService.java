@@ -1,35 +1,35 @@
 package service;/* created by Kaminskii Ivan
  */
 
-import model.UserDto;
+import model.User;
 import storage.UserStorage;
 
 import java.time.LocalDate;
 import java.util.Collection;
 
-public class MailService {
-    private final static MailService instance = new MailService();
+public class MailRegService {
+    private final static MailRegService instance = new MailRegService();
     private final UserStorage storage;
 
 
-    public MailService() {
+    public MailRegService() {
         this.storage = UserStorage.getInstance();
     }
 
-    public Collection<UserDto> getAll() {
+    public Collection<User> getAll() {
         return this.storage.getAll();
     }
 
-    public void signUp(UserDto user) {
+    public void signUp(User user) {
         user.setRegistration(LocalDate.now());
         this.storage.add(user);
     }
-    public UserDto get(String login) {
+    public User get(String login) {
         return this.storage.get(login);
     }
 
 
-    public static MailService getInstance() {
+    public static MailRegService getInstance() {
         return instance;
     }
 }

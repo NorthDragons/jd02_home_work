@@ -1,7 +1,7 @@
 package controllers.web.servlets;
 
-import model.UserDto;
-import service.MailService;
+import model.User;
+import service.MailRegService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +15,10 @@ import java.util.Collection;
 
 @WebServlet(name = "UsersServlet", urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
-    MailService mailService;
+    MailRegService mailService;
 
     public UsersServlet() {
-        this.mailService = MailService.getInstance();
+        this.mailService = MailRegService.getInstance();
     }
 
     @Override
@@ -26,9 +26,9 @@ public class UsersServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         resp.setContentType("text/html; charset=UTF-8");
-        Collection<UserDto> users = mailService.getAll();
-        for (UserDto user : users) {
-            writer.println(user);
+        Collection<User> users = mailService.getAll();
+        for (User user : users) {
+            writer.println(user+"\n");
         }
     }
 }

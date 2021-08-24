@@ -4,12 +4,13 @@ package model;/* created by Kaminskii Ivan
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
 @Getter
 @Setter
-public class UserDto {
+public class User implements Serializable {
     private String login;
     private String password;
     private String firstName;
@@ -18,7 +19,7 @@ public class UserDto {
     private String birthday;
     private LocalDate registration;
 
-    public UserDto(String login, String password, String firstName, String lastName, String middleName, String birthday) {
+    public User(String login, String password, String firstName, String lastName, String middleName, String birthday) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -39,11 +40,6 @@ public class UserDto {
                 '}';
     }
 }
-
-
-
-
-
 
 
 //

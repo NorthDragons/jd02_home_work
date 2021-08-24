@@ -1,21 +1,21 @@
 package service;/* created by Kaminskii Ivan
  */
 
-import model.UserDto;
+import model.User;
 
 import java.util.Objects;
 
 public class MailInService {
     private final static MailInService instance = new MailInService();
-   private final MailService mailService;
+   private final MailRegService mailService;
 
     public MailInService() {
-        this.mailService = MailService.getInstance();
+        this.mailService = MailRegService.getInstance();
     }
 
 
-    public UserDto authentication(String login, String password) {
-        UserDto user = this.mailService.get(login);
+    public User authentication(String login, String password) {
+        User user = this.mailService.get(login);
         if(user == null){
             return null;
         }

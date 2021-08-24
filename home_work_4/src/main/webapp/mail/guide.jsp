@@ -20,10 +20,15 @@
 </table>
 <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
 <tr><td rowspan="2" style="width:80%">
+ <c:when test="${sessionScope.user != null}">
+        <p>Вы уже вошли, может хотите выйти?</p>
+        <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/logout';" value="Выйти" /></p>
+    </c:when>
 <h2>Выберите действие</h2>
 <p><a href="${pageContext.request.contextPath}"><span style="margin-left:5px;">Личный кабинет</span></a></p>
 <p><a href="${pageContext.request.contextPath}/message"><span style="margin-left:5px;">Написать сообщение</span></a></p>
-<p><a href="${pageContext.request.contextPath}"><span style="margin-left:5px;">Мои сообщения</span></a></p>
+<p><a href="${pageContext.request.contextPath}/chat"><span style="margin-left:5px;">Мои сообщения</span></a></p>
+
 </td></tr>
 </table>
 <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">

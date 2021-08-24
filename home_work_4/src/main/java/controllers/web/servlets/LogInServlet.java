@@ -1,7 +1,7 @@
 package controllers.web.servlets;/* created by Kaminskii Ivan
  */
 
-import model.UserDto;
+import model.User;
 import service.MailInService;
 
 import javax.servlet.ServletException;
@@ -28,7 +28,7 @@ public class LogInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        UserDto user = mailInService.authentication(login, password);
+        User user = mailInService.authentication(login, password);
         if (user == null) {
             throw new IllegalAccessError("неверный логин или пароль");
         } else {
