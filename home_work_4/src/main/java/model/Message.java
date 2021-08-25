@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -24,6 +25,6 @@ public class Message implements Serializable {
     public String toString() {
         return  "Отправитель: " + from + "\n</br>" +
                 "Сообщение: " + text + "\n</br>" +
-                when+"\n</br></br>";
+                when.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))+"\n</br></br>";
     }
 }

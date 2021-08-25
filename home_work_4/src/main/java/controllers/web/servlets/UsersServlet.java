@@ -1,7 +1,7 @@
 package controllers.web.servlets;
 
 import model.User;
-import service.MailRegService;
+import service.RegService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +15,10 @@ import java.util.Collection;
 
 @WebServlet(name = "UsersServlet", urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
-    MailRegService mailService;
+    RegService mailService;
 
     public UsersServlet() {
-        this.mailService = MailRegService.getInstance();
+        this.mailService = RegService.getInstance();
     }
 
     @Override

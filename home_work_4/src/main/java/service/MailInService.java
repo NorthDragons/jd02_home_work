@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class MailInService {
     private final static MailInService instance = new MailInService();
-   private final MailRegService mailService;
+   private final RegService mailService;
 
     public MailInService() {
-        this.mailService = MailRegService.getInstance();
+        this.mailService = RegService.getInstance();
     }
 
 

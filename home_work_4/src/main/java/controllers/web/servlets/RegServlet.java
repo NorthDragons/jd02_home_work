@@ -2,7 +2,7 @@ package controllers.web.servlets;/* created by Kaminskii Ivan
  */
 
 import model.User;
-import service.MailRegService;
+import service.RegService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,10 +20,10 @@ public class RegServlet extends HttpServlet {
     private static final String MIDDLE_NAME = "middleName";
     private static final String BIRTHDAY = "birthday";
 
-    private final MailRegService mailService;
+    private final RegService regService;
 
     public RegServlet() {
-        mailService = MailRegService.getInstance();
+        regService = RegService.getInstance();
     }
 
 
@@ -46,7 +46,7 @@ public class RegServlet extends HttpServlet {
 
         User userDto = new User(login, password, firstName, lastName, middleName, birthday);
 
-        this.mailService.signUp(userDto);
+        this.regService.signUp(userDto);
         req.getSession().setAttribute("user", userDto);
         resp.sendRedirect(req.getContextPath() + "/hello");
 

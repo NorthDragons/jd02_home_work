@@ -25,7 +25,6 @@ public class UserStorage {
         this.users.put(user.getLogin(), user);
     }
 
-
     public Collection<User> getAll() {
         return this.users.values();
     }
