@@ -1,2 +1,9 @@
-package storage.api;public interface IUserStorage {
+package storage.api;
+
+import model.User;
+
+public interface IUserStorage {
+
+    User get(String login);
+    void add(User user);
 }

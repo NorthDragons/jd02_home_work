@@ -7,14 +7,12 @@
 
     <display-name>my first project</display-name>
 
-<!--        <servlet>-->
-<!--        <servlet-name>HelloWorld</servlet-name>-->
-<!--        <servlet-class>by.it_academy.HelloServlet</servlet-class>-->
-<!--    </servlet>-->
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>HelloWorld</servlet-name>-->
-<!--        <url-pattern>/test</url-pattern>-->
-<!--    </servlet-mapping>-->
+
+
+
+    <listener>
+        <listener-class>controllers/web/listeners/DefaultDataInitializer</listener-class>
+    </listener>
 
 </web-app>

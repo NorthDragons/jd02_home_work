@@ -1,2 +1,6 @@
-package storage;public enum StorageTipe {
+package storage;
+
+public enum StorageTipe {
+    FILE,
+    MEMORY
 }
