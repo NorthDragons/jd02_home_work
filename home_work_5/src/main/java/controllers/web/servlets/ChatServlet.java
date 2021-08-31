@@ -5,7 +5,7 @@ import model.Message;
 import model.User;
 import service.MailMessageService;
 import service.api.IMessageService;
-import storage.ChatsStorage;
+import storage.MemoryChatStorage;
 import storage.api.IChatStorage;
 
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ public class ChatServlet extends HttpServlet {
 
     public ChatServlet() {
         this.messageService = MailMessageService.getInstance();
-        this.chatStorage= ChatsStorage.getInstance();
+        this.chatStorage= MemoryChatStorage.getInstance();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ChatServlet extends HttpServlet {
         }
 
         String login = user.getLogin();
-        List<Message> messageList = this.chatStorage.get(login);
+        List<Message> messageList = this.chatStorage.getMessage(login);
         StringBuilder text=new StringBuilder();
         for (Message message : messageList) {
             text.append(message.toString());

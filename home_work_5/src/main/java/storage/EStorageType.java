@@ -1,6 +1,7 @@
 package storage;
 
-public enum StorageTipe {
+public enum EStorageType {
     FILE,
     MEMORY
+
 }

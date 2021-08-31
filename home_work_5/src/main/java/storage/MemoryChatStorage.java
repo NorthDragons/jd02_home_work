@@ -9,12 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatsStorage implements IChatStorage {
-    private final static ChatsStorage instance = new ChatsStorage();
+public class MemoryChatStorage implements IChatStorage {
+    private final static MemoryChatStorage instance = new MemoryChatStorage();
     private final Map<String, List<Message>> chat = new HashMap<>();
 
     @Override
-    public List<Message> get(String login) {
+    public List<Message> getMessage(String login) {
         return chat.get(login);
     }
 
@@ -30,7 +30,7 @@ public class ChatsStorage implements IChatStorage {
         newMessage.add(message);
     }
 
-    public static ChatsStorage getInstance() {
+    public static MemoryChatStorage getInstance() {
         return instance;
     }
 

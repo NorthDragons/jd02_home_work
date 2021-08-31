@@ -5,7 +5,7 @@ import model.Message;
 import java.util.List;
 
 public interface IChatStorage {
-    List<Message> get(String login);
+    List<Message> getMessage(String login);
 
     void addMessage(String login, Message message);
 

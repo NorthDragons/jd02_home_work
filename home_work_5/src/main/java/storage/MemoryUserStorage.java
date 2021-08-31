@@ -2,16 +2,17 @@ package storage;/* created by Kaminskii Ivan
  */
 
 import model.User;
+import storage.api.IUserStorage;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserStorage {
+public class MemoryUserStorage implements IUserStorage {
     private final Map<String, User> users = new HashMap<>();
-    private final static UserStorage instance = new UserStorage();
+    private final static MemoryUserStorage instance = new MemoryUserStorage();
 
-    public UserStorage() {
+    public MemoryUserStorage() {
     }
 
     public User get(String login){
@@ -29,7 +30,7 @@ public class UserStorage {
         return this.users.values();
     }
 
-    public static UserStorage getInstance() {
+    public static MemoryUserStorage getInstance() {
         return instance;
     }
 }
