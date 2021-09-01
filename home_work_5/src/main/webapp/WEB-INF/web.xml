@@ -7,9 +7,14 @@
     <display-name>my first project</display-name>
 
     <welcome-file-list>
-        <welcome-file>mail/main.jsp</welcome-file>
+        <welcome-file>mail/choice.jsp</welcome-file>
     </welcome-file-list>
 
+
+    <context-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
     <context-param>
         <param-name>chat_storage</param-name>
         <param-value>FILE</param-value>

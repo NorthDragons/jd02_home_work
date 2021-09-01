@@ -33,13 +33,12 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", fio='" + firstName + lastName + middleName + '\'' +
-                ", birthday=" + birthday +
-                ", registration=" + registration +
-                '}';
+        return "login = " + login + "</br>" +
+                "password = " + password + "</br>" +
+                "fio = " + firstName + lastName + middleName + "</br>" +
+                "birthday = " + birthday + "</br>" +
+                "registration = " + registration + "</br>" +
+                "</br>";
     }
 }
 

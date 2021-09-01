@@ -8,9 +8,9 @@
  <title>Главная</title>
 </head>
 
-<body>
+<body background="img/cat.jpeg">
 
- <table border="1" align="center" rules="rows" style="width:60%;">
+ <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
  <tr> <td>
 
 <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">

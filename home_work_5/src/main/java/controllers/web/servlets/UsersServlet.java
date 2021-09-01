@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
-@WebServlet(name = "UsersServlet", urlPatterns = "/users")
+@WebServlet(name = "usersInfo", urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
     RegService mailService;
 
@@ -23,12 +21,12 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-        resp.setContentType("text/html; charset=UTF-8");
         Collection<User> users = mailService.getAll();
+        StringBuffer stringBuffer = new StringBuffer();
         for (User user : users) {
-            writer.println(user+"\n");
+            stringBuffer.append(user.toString());
         }
+        req.setAttribute("users", stringBuffer);
+        req.getRequestDispatcher("mail/allUsers.jsp").forward(req, resp);
     }
 }

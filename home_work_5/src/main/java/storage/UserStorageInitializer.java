@@ -1,25 +1,28 @@
 package storage;/* created by Kaminskii Ivan
  */
 
-import storage.api.IChatStorage;
 import storage.api.IUserStorage;
 
 public class UserStorageInitializer {
-    private static EStorageType userType;
+    private static EStorageType storageType;
 
-    public static synchronized void setStorageTipe(EStorageType userType) {
+    public static EStorageType getStorageType(){
+        return storageType;
+    }
+
+    public static synchronized void setStorageType(EStorageType userType) {
         if (userType != null) {
-            UserStorageInitializer.userType = userType;
+            UserStorageInitializer.storageType = userType;
         } else {
             throw new IllegalStateException("Не получается поменять storage");
         }
     }
 
     public static IUserStorage getInstance() {
-        if (userType == null) {
+        if (storageType == null) {
             throw new IllegalArgumentException("не передан тип хранения");
         }
-        switch (userType) {
+        switch (storageType) {
             case FILE:
                 return FileUserStorage.getInstance();
             case MEMORY:

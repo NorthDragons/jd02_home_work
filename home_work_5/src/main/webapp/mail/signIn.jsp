@@ -10,7 +10,10 @@
 <body>
 <form action="${pageContext.request.contextPath}/login" method="POST">
 
-<table style="background-color: #ECE5B6;" width="30%" >
+<table border="1" align="center" rules="rows" style="width:60%;">
+ <tr> <td>
+
+<table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
 <caption style="background-color: #ECE5B6;" width="50%"><b>Авторизация</b></caption>
 
       <tr>
@@ -21,14 +24,21 @@
 	     <th width="50%">Password</TH>
 	  	 <td width="50%"><input type="text" name="password" required placeholder="Введите пароль"></TD>
 	  </tr>
-	  <tr>
-        	 <th></th>
-      		  <td width="50%"><input type="submit" value="Войти" ></TD>
-      </tr>
 
 </table>
-</form>
-<p>Не прошли регистрацию?</p>
-            <button
+</td></tr>
+</table>
+
+<table align="center" rules="rows" style="width:60%;">
+ <tr> <td>
+ <input type="submit" value="Войти" style="width:100%">
+
+<p align="center">Нет аккаунта?</p>
+ <button  rules="rows" style="width:100%;"
             onclick="window.location.href = '${pageContext.request.contextPath}/reg';">Зарегистрироваться</button>
+</td></tr>
+</table>
+
+</form>
+
 </br>

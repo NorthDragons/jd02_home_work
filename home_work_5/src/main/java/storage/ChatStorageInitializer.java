@@ -4,25 +4,29 @@ package storage;/* created by Kaminskii Ivan
 import storage.api.IChatStorage;
 
 public class ChatStorageInitializer {
-    private static EStorageType storageTipe;
+    private static EStorageType storageType;
 
-    public static synchronized void setStorageTipe(EStorageType storageTipe) {
-        if (storageTipe != null) {
-            ChatStorageInitializer.storageTipe = storageTipe;
+    public static EStorageType getStorageType(){
+        return storageType;
+    }
+
+    public static synchronized void setStorageType(EStorageType storageType) {
+        if (storageType != null) {
+            ChatStorageInitializer.storageType = storageType;
         } else {
             throw new IllegalStateException("Не получается поменять storage");
         }
     }
 
     public static IChatStorage getInstance() {
-        if(storageTipe==null){
+        if(storageType ==null){
             throw new IllegalArgumentException("не передан тип хранения");
         }
-        switch (storageTipe) {
+        switch (storageType) {
             case FILE:
-                return MemoryChatStorage.getInstance();
-            case MEMORY:
                 return FileChatStorage.getInstance();
+            case MEMORY:
+                return MemoryChatStorage.getInstance();
             default:
                 throw new IllegalArgumentException("Тип хранения введён не правильно");
         }
