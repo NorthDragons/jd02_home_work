@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.it-academy</groupId>
-    <artifactId>home_work_6</artifactId>
+    <artifactId>new_project6</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -89,4 +89,5 @@
 
         </plugins>
     </build>
+
 </project>

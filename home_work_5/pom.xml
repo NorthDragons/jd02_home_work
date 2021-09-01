@@ -57,7 +57,7 @@
     </dependencies>
 
     <build>
-        <finalName>mailer6</finalName>
+        <finalName>mailer</finalName>
         <plugins>
 
             <plugin>
