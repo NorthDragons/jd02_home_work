@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/chats", "/message","/hello","/user"})
+@WebFilter(urlPatterns = {"/chat", "/message","/hello","/user"})
 public class SecurityFilter implements Filter {
 
     @Override

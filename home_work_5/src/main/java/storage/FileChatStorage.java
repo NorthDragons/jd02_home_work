@@ -26,6 +26,7 @@ public class FileChatStorage implements IChatStorage {
 
     @Override
     public List<Message> getMessage(String login) {
+        this.getAll();
         return chat.get(login);
     }
 

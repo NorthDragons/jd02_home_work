@@ -15,17 +15,15 @@
         <param-name>encoding</param-name>
         <param-value>UTF-8</param-value>
     </context-param>
+
     <context-param>
         <param-name>chat_storage</param-name>
         <param-value>FILE</param-value>
     </context-param>
+
     <context-param>
         <param-name>user_storage</param-name>
         <param-value>FILE</param-value>
     </context-param>
-
-    <!--    <listener>-->
-    <!--        <listener-class>home_work_5/src/main/java/controllers/web/listeners/AdminReg.java</listener-class>-->
-    <!--    </listener>-->
 
 </web-app>
