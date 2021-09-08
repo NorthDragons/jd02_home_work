@@ -1,6 +1,7 @@
 package storage;/* created by Kaminskii Ivan
  */
 
+import model.Message;
 import storage.api.IChatStorage;
 
 public class ChatStorageInitializer {
