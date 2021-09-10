@@ -6,11 +6,11 @@ import service.api.IUserService;
 import storage.DBStorage;
 import storage.api.IDBStorage;
 
-public class UserService implements IUserService {
-    private static final UserService instance = new UserService();
+public class EmployerService implements IUserService {
+    private static final EmployerService instance = new EmployerService();
     private static IDBStorage storage;
 
-    public UserService() {
+    public EmployerService() {
         storage= DBStorage.getInstance();
     }
 
@@ -19,7 +19,7 @@ public class UserService implements IUserService {
         storage.putUser(employer);
     }
 
-    public static UserService getInstance() {
+    public static EmployerService getInstance() {
         return instance;
     }
 }

@@ -2,7 +2,7 @@ package controller.web.servlets;/* created by Kaminskii Ivan
  */
 
 import model.Employer;
-import service.UserService;
+import service.EmployerService;
 import service.api.IUserService;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class HelloServlet extends HttpServlet {
     private static Employer employer;
 
     public HelloServlet() {
-        userService = UserService.getInstance();
+        userService = EmployerService.getInstance();
      employer= Employer.getInstance();
     }
 

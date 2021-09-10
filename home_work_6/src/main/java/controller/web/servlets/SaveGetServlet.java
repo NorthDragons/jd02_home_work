@@ -2,7 +2,7 @@ package controller.web.servlets;/* created by Kaminskii Ivan
  */
 
 import model.Employer;
-import service.UserService;
+import service.EmployerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(name = "save", urlPatterns = "/save")
 public class SaveGetServlet extends HttpServlet {
-    private static UserService userService;
+    private static EmployerService userService;
     private static Employer employer;
 
     private static final String NAME = "name";
@@ -21,7 +21,7 @@ public class SaveGetServlet extends HttpServlet {
 
     public SaveGetServlet() {
         employer=Employer.getInstance();
-        userService = UserService.getInstance();
+        userService = EmployerService.getInstance();
     }
 
     @Override

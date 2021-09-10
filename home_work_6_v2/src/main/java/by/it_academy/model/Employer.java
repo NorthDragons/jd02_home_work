@@ -1,4 +1,4 @@
-package model;/* created by Kaminskii Ivan
+package by.it_academy.model;/* created by Kaminskii Ivan
  */
 
 import lombok.Getter;
