@@ -11,8 +11,7 @@ import java.io.Serializable;
 @Setter
 public class Position implements Serializable {
     private static String name;
+    private static Long id;
 
-    public Position(String name1) {
-        name = name1;
-    }
+
 }

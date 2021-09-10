@@ -31,7 +31,6 @@ public class DBStorage implements IDBStorage {
             ) {
                 preparedStatement.setString(1, name);
                 preparedStatement.setDouble(2, salary);
-
                 preparedStatement.executeUpdate();
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     while (generatedKeys.next()) {

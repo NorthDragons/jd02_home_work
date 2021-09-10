@@ -15,9 +15,9 @@ public class Employer implements Serializable {
 
     private  String name;
     private  Double salary;
-    private  Long position;
+    private  Long id;
     private  Department department;
-    private  Position id;
+    private  Position position;
 
     public static Employer getInstance(){
         return instance;
