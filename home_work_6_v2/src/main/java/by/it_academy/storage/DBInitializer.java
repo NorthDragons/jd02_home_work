@@ -8,11 +8,12 @@ import java.beans.PropertyVetoException;
 
 public class DBInitializer {
     private static final DBInitializer instance = new DBInitializer();
-    private static ComboPooledDataSource cpds;
+    private static final ComboPooledDataSource cpds;
 
     static {
+        cpds = new ComboPooledDataSource();
         try {
-            cpds = new ComboPooledDataSource();
+
             cpds.setDriverClass("org.postgresql.Driver"); //loads the jdbc driver
         } catch (PropertyVetoException e) {
             e.printStackTrace();

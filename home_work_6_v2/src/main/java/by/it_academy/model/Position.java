@@ -10,8 +10,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Position implements Serializable {
-    private static String name;
-    private static Long id;
+    private String name;
+    private Long id;
 
 
 }

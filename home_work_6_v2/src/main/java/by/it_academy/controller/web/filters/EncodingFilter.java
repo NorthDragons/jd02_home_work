@@ -25,7 +25,7 @@ public class EncodingFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         if(encoding==null){
-            throw new IllegalArgumentException("ошибочка вышла");
+            throw new IllegalArgumentException("Ошибка EncodingFilter");
         }
         response.setCharacterEncoding(encoding);
         request.setCharacterEncoding(encoding);
