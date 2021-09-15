@@ -5,6 +5,7 @@ import by.it_academy.model.Department;
 import by.it_academy.storage.api.IDepartmentStorage;
 
 import java.sql.*;
+import java.util.Collection;
 
 public class DepartmentStorage implements IDepartmentStorage {
     DBInitializer dbInitializer;
@@ -29,6 +30,11 @@ public class DepartmentStorage implements IDepartmentStorage {
     }
 
     @Override
+    public Collection<Department> getAllDepartment() {
+        return null;
+    }
+
+    @Override
     public Department getDepartment(Long id) {
         Department department = new Department();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
@@ -46,5 +52,19 @@ public class DepartmentStorage implements IDepartmentStorage {
         }
 
         return null;
+    }
+
+    @Override
+    public String getDepName(Long id) {
+        String name = "";
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.departments WHERE id=" + id)) {
+                name = resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 }

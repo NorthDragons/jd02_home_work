@@ -1,10 +1,10 @@
-package by.it_academy.storage.api;
+package by.it_academy.service.api;
 
 import by.it_academy.model.Position;
 
 import java.util.Collection;
 
-public interface IPositionStorage {
+public interface IPositionService {
     void putPosition(Position position);
 
     Position getPosition(Long id);

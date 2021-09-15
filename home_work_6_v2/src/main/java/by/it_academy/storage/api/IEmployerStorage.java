@@ -1,9 +1,14 @@
 package by.it_academy.storage.api;
 
-import by.it_academy.model.Employer;
+import by.it_academy.model.Employee;
+
+import java.util.Collection;
 
 public interface IEmployerStorage {
-    void putEmployer(Employer employer);
-    Employer getEmployer(Long id);
+    void putEmployer(Employee employer);
+
+    Employee getEmployee(Long id);
+
+    Collection<Employee> getAllEmployers();
 
 }

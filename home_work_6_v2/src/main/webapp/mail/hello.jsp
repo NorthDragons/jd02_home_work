@@ -32,7 +32,7 @@
 
  <a href="${pageContext.request.contextPath}/department" class="btn">Отделы</a>
  <a href="${pageContext.request.contextPath}/position" class="btn">Должности</a>
- <a href="${pageContext.request.contextPath}/employer" class="btn">Сотрудники</a>
+ <a href="${pageContext.request.contextPath}/allEmployees" class="btn">Сотрудники</a>
                 </form>
             </td></tr>
         </table>

@@ -13,20 +13,20 @@ public class DBInitializer {
     static {
         cpds = new ComboPooledDataSource();
         try {
-
             cpds.setDriverClass("org.postgresql.Driver"); //loads the jdbc driver
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
-        cpds.setJdbcUrl("jdbc:postgresql://localhost/testdb");
-        cpds.setUser("dbuser");
-        cpds.setPassword("dbpassword");
+        cpds.setJdbcUrl("jdbc:postgresql://localhost/crm");
+        cpds.setUser("postgres");
+        cpds.setPassword("password");
     }
 
     public ComboPooledDataSource getCpds() {
         return cpds;
     }
-    public static DBInitializer getInstance(){
+
+    public static DBInitializer getInstance() {
         return instance;
     }
 }

@@ -10,8 +10,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Employer implements Serializable {
-    private static Employer instance = new Employer();
+public class Employee implements Serializable {
+    private static Employee instance = new Employee();
 
     private  String name;
     private  Double salary;
@@ -19,7 +19,7 @@ public class Employer implements Serializable {
     private  Department department;
     private  Position position;
 
-    public static Employer getInstance(){
+    public static Employee getInstance(){
         return instance;
     }
 }

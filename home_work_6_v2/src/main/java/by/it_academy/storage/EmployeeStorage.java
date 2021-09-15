@@ -2,21 +2,27 @@ package by.it_academy.storage;/* created by Kaminskii Ivan
  */
 
 import by.it_academy.model.Department;
-import by.it_academy.model.Employer;
+import by.it_academy.model.Employee;
 import by.it_academy.model.Position;
+import by.it_academy.service.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class EmployerStorage implements IEmployerStorage {
-    private static EmployerStorage instance;
+public class EmployeeStorage implements IEmployerStorage {
+    private static final EmployeeStorage instance = new EmployeeStorage();
     private static DBInitializer dbInitializer;
+    private static EmployeeService employerService;
 
-    public EmployerStorage() {
+    public EmployeeStorage() {
+        employerService = EmployeeService.getInstance();
         dbInitializer = DBInitializer.getInstance();
     }
 
-    public void putEmployer(Employer employer) {
+    public void putEmployer(Employee employer) {
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement("INSERT INTO application.employers(\n" +
@@ -41,14 +47,13 @@ public class EmployerStorage implements IEmployerStorage {
     }
 
     @Override
-    public Employer getEmployer(Long id) {
-        Employer employer = new Employer();
+    public Employee getEmployee(Long id) {
+        Employee employer = new Employee();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary," +
-                    "position.name, department.name" +
-                    "FROM application.employers\n" +
-                    "\\n" +
+            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, positions.name, departments.name \n" +
+                    "FROM application.employers \n" +
+                    "\n" +
                     "JOIN application.positions\n" +
                     "ON employers.position=positions.id\n" +
                     "JOIN application.departments\n" +
@@ -70,12 +75,45 @@ public class EmployerStorage implements IEmployerStorage {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка работы с базой данных", e);
         }
         return employer;
     }
 
-    public static EmployerStorage getInstance() {
+    @Override
+    public Collection<Employee> getAllEmployers() {
+        List<Employee> employers = new ArrayList<>();
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.employers")) {
+                while (resultSet.next()) {
+                    Employee employer = new Employee();
+                    employer.setId(resultSet.getLong(1));
+                    employer.setName(resultSet.getString(2));
+                    employer.setSalary(resultSet.getDouble(3));
+
+                    Position position = new Position();
+                    Long posId = resultSet.getLong(4);
+                    position.setId(posId);
+//                    position.setName(employerService.getPosName(posId));
+                    employer.setPosition(position);
+
+                    Department department = new Department();
+                    Long depId = resultSet.getLong(5);
+                    department.setId(depId);
+//                    department.setDName(employerService.getDepName(depId));
+                    employer.setDepartment(department);
+
+                    employers.add(employer);
+                }
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("Ошибка подключения к базе данных", e);
+        }
+        return employers;
+    }
+
+    public static EmployeeStorage getInstance() {
         return instance;
     }
 }

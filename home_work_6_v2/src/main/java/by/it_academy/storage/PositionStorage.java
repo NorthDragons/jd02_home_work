@@ -5,12 +5,16 @@ import by.it_academy.model.Position;
 import by.it_academy.storage.api.IPositionStorage;
 
 import java.sql.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PositionStorage implements IPositionStorage {
-    DBInitializer dbInitializer;
+    private static final PositionStorage instance = new PositionStorage();
+    private static DBInitializer dbInitializer;
 
     public PositionStorage() {
-        this.dbInitializer = DBInitializer.getInstance();
+        dbInitializer = DBInitializer.getInstance();
     }
 
     @Override
@@ -51,5 +55,42 @@ public class PositionStorage implements IPositionStorage {
         }
 
         return null;
+    }
+
+    @Override
+    public Collection<Position> getAllPosition() {
+        List<Position> positions = new LinkedList<>();
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.positions")) {
+                while (resultSet.next()) {
+                    Position position = new Position();
+                    position.setId(resultSet.getLong(1));
+                    position.setName(resultSet.getString(2));
+                    positions.add(position);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return positions;
+    }
+
+    @Override
+    public String getPosName(Long id) {
+        String name = "";
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.positions WHERE id=" + id)) {
+                name = resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    public static PositionStorage getInstance() {
+        return instance;
     }
 }
