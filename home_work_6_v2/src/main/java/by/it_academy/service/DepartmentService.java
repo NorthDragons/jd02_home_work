@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
 
 public class DepartmentService implements IDepartmentService {
     private static DBInitializer dbInitializer;
@@ -26,6 +27,11 @@ public class DepartmentService implements IDepartmentService {
     @Override
     public void putDepartment(Department department, Long parentId) {
 
+    }
+
+    @Override
+    public Collection<Department> getAllDepartment() {
+        return null;
     }
 
     @Override
