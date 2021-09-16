@@ -8,10 +8,11 @@ import java.sql.*;
 import java.util.Collection;
 
 public class DepartmentStorage implements IDepartmentStorage {
-    DBInitializer dbInitializer;
+    private static DBInitializer dbInitializer;
+    private static final DepartmentStorage instance = new DepartmentStorage();
 
     public DepartmentStorage() {
-        this.dbInitializer = DBInitializer.getInstance();
+        dbInitializer = DBInitializer.getInstance();
     }
 
     @Override
@@ -38,33 +39,38 @@ public class DepartmentStorage implements IDepartmentStorage {
     public Department getDepartment(Long id) {
         Department department = new Department();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT departments.id," +
-                    " departments.name, departments.parent_dep FROM application.departments WHERE id=" + id)) {
+            final Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.departments WHERE id=" + id)) {
                 department.setId(resultSet.getLong(1));
                 department.setDName(resultSet.getString(2));
-                if ((resultSet.getLong(1) == resultSet.getLong(3))) {
-                    department.setParentDep(department);
+                if (resultSet.getLong(1) != resultSet.getLong(3)) {
+                    department.setParentDep(this.getDepartment(resultSet.getLong(3)));
+                } else {
+                    Department parentDep = new Department();
+                    parentDep.setDName("Не имеет родительского отдела");
+                    department.setParentDep(parentDep);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка работы с базой данных(DEP)", e);
         }
-
-        return null;
+        return department;
     }
 
     @Override
     public String getDepName(Long id) {
-        String name = "";
+        String name;
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
+            final Statement statement = connection.createStatement();
             try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.departments WHERE id=" + id)) {
                 name = resultSet.getString(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка работы с базой данных(DEP", e);
         }
         return name;
+    }
+    public static DepartmentStorage getInstance(){
+        return instance;
     }
 }

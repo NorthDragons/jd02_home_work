@@ -8,7 +8,6 @@ import by.it_academy.service.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -82,30 +81,11 @@ public class EmployeeStorage implements IEmployerStorage {
 
     @Override
     public Collection<Employee> getAllEmployers() {
-        List<Employee> employers = new ArrayList<>();
+        List<Employee> employers;
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
             try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.employers")) {
-                while (resultSet.next()) {
-                    Employee employer = new Employee();
-                    employer.setId(resultSet.getLong(1));
-                    employer.setName(resultSet.getString(2));
-                    employer.setSalary(resultSet.getDouble(3));
-
-                    Position position = new Position();
-                    Long posId = resultSet.getLong(4);
-                    position.setId(posId);
-//                    position.setName(employerService.getPosName(posId));
-                    employer.setPosition(position);
-
-                    Department department = new Department();
-                    Long depId = resultSet.getLong(5);
-                    department.setId(depId);
-//                    department.setDName(employerService.getDepName(depId));
-                    employer.setDepartment(department);
-
-                    employers.add(employer);
-                }
+               employers=employerService.allMapping(resultSet);
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка подключения к базе данных", e);
