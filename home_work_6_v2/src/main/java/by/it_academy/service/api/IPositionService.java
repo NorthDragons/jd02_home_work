@@ -11,5 +11,7 @@ public interface IPositionService {
 
     Collection<Position> getAllPosition();
 
-    String getPosName(Long id);
+    String getPosName(Position position);
+
+    Long getPosId(Position position);
 }

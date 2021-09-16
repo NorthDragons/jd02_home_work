@@ -23,7 +23,11 @@ public class EmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
         Employee employee = employeeService.getEmp(id);
+        String posName = employeeService.getPosName(employee.getPosition());
+        String depName = employeeService.getDepName(employee.getDepartment());
         req.setAttribute("employee", employee);
+        req.setAttribute("position", posName);
+        req.setAttribute("department", depName);
         req.getRequestDispatcher("mail/emp.jsp").forward(req, resp);
 
     }

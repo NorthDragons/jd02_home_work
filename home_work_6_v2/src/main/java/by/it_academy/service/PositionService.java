@@ -35,7 +35,12 @@ public class PositionService implements IPositionService {
     }
 
     @Override
-    public String getPosName(Long id) {
-        return positionStorage.getPosName(id);
+    public String getPosName(Position position) {
+        return positionStorage.getPosName(position);
+    }
+
+    @Override
+    public Long getPosId(Position position) {
+        return positionStorage.getPosId(position);
     }
 }

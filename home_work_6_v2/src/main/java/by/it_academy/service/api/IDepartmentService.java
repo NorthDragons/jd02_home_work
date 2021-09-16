@@ -12,5 +12,7 @@ public interface IDepartmentService {
 
     Department getDepartment(Long id);
 
-    String getDepName(Long id);
+    String getDepName(Department department);
+
+    Long getDepId(Department department);
 }

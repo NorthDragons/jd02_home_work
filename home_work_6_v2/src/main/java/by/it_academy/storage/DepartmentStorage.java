@@ -58,19 +58,50 @@ public class DepartmentStorage implements IDepartmentStorage {
     }
 
     @Override
-    public String getDepName(Long id) {
+    public String getDepName(Department department) {
         String name;
-        try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            final Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.departments WHERE id=" + id)) {
-                name = resultSet.getString(1);
+        if (department.getDName() != null) {
+            return department.getDName();
+        } else if (department.getId() != null) {
+            Long id = department.getId();
+            try (Connection connection = dbInitializer.getCpds().getConnection()) {
+                final Statement statement = connection.createStatement();
+                try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.departments WHERE id=" + id)) {
+                   resultSet.next();
+                    name = resultSet.getString(1);
+                }
+            } catch (SQLException e) {
+                throw new IllegalArgumentException("Ошибка работы с базой данных(DEP)", e);
             }
-        } catch (SQLException e) {
-            throw new IllegalArgumentException("Ошибка работы с базой данных(DEP", e);
+        } else {
+            throw new IllegalArgumentException("Не задано обязательного условия для получения имени -DEP");
         }
         return name;
     }
-    public static DepartmentStorage getInstance(){
+
+    @Override
+    public Long getDepId(Department department) {
+        Long id;
+        if (department.getId() != null) {
+            id = department.getId();
+        } else if (department.getDName() != null) {
+            try (Connection connection = dbInitializer.getCpds().getConnection()) {
+                String name = department.getDName();
+                Statement statement = connection.createStatement();
+                try (ResultSet resultSet = statement.executeQuery("SELECT id FROM application.positions WHERE name=" + name)) {
+                    resultSet.next();
+                    id = resultSet.getLong(1);
+                }
+            } catch (SQLException e) {
+                throw new IllegalStateException("Ошибка получения ID", e);
+            }
+        } else {
+            throw new IllegalArgumentException("Не задано обязательного условия для получения ID -DEP");
+        }
+        return id;
+    }
+
+    public static DepartmentStorage getInstance() {
         return instance;
     }
 }

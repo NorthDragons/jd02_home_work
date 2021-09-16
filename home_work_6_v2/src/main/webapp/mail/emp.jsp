@@ -23,7 +23,8 @@
                                            <td>${employee.name}</td><br>
                                            <td><p><fmt:formatNumber type = "number"
                                                            maxFractionDigits = "3" value = "${employee.salary}" /></p></td><br>
-                                           <td>${employers.position.id}</td><br>
+                                           <td>${position}</td><br>
+                                           <td>${department}</td><br>
                                        </tr>
 
                 </form>

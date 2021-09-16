@@ -1,7 +1,9 @@
 package by.it_academy.service;/* created by Kaminskii Ivan
  */
 
+import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.service.api.IEmployerService;
 import by.it_academy.storage.EmployeeStorage;
 
@@ -10,34 +12,43 @@ import java.util.Collection;
 import java.util.List;
 
 public class EmployeeService implements IEmployerService {
+
     private static final EmployeeService instance = new EmployeeService();
     private static EmployeeStorage storage;
-    private static HEmploeeHelper hEmploeeHelper;
+    private static HEmployeeHelper hEmployeeHelper;
 
     private static DepartmentService departmentService;
     private static PositionService positionService;
 
     public EmployeeService() {
-        hEmploeeHelper = HEmploeeHelper.getInstance();
+        hEmployeeHelper = HEmployeeHelper.getInstance();
         storage = EmployeeStorage.getInstance();
-
         departmentService = DepartmentService.getInstance();
         positionService = PositionService.getInstance();
     }
-
 
     public static EmployeeService getInstance() {
         return instance;
     }
 
     @Override
-    public String getPosName(Long id) {
-        return positionService.getPosName(id);
+    public String getPosName(Position position) {
+        return positionService.getPosName(position);
     }
 
     @Override
-    public String getDepName(Long id) {
-        return departmentService.getDepName(id);
+    public Long getPosId(Position position) {
+        return positionService.getPosId(position);
+    }
+
+    @Override
+    public String getDepName(Department department) {
+        return departmentService.getDepName(department);
+    }
+
+    @Override
+    public Long getDepId(Department department) {
+        return departmentService.getDepId(department);
     }
 
     @Override
@@ -52,11 +63,11 @@ public class EmployeeService implements IEmployerService {
 
     @Override
     public List<Employee> allMapping(ResultSet resultSet) {
-        return hEmploeeHelper.allMapping(resultSet);
+        return hEmployeeHelper.allGetMapping(resultSet);
     }
 
     @Override
     public Employee onceMapping(ResultSet resultSet) {
-        return hEmploeeHelper.onceMapping(resultSet);
+        return hEmployeeHelper.onceGetMapping(resultSet);
     }
 }

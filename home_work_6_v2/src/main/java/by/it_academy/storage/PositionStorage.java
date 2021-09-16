@@ -51,7 +51,7 @@ public class PositionStorage implements IPositionStorage {
                 position.setName(resultSet.getString(2));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);
         }
 
         return null;
@@ -71,23 +71,52 @@ public class PositionStorage implements IPositionStorage {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);
         }
         return positions;
     }
 
     @Override
-    public String getPosName(Long id) {
-        String name = "";
-        try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.positions WHERE id=" + id)) {
-                name = resultSet.getString(1);
+    public String getPosName(Position position) {
+        String name;
+        if (position.getName() != null) {
+            name = position.getName();
+        } else if (position.getId() != null) {
+            Long id = position.getId();
+            try (Connection connection = dbInitializer.getCpds().getConnection()) {
+                Statement statement = connection.createStatement();
+                try (ResultSet resultSet = statement.executeQuery("SELECT positions.name FROM application.positions WHERE id=" + id)) {
+                    resultSet.next();
+                    name = resultSet.getString(1);
+                }
+            } catch (SQLException e) {
+                throw new IllegalStateException("Ошибка получения имени", e);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            throw new IllegalArgumentException("Не задано обязательных параметров для получения Имени -POS");
         }
         return name;
+    }
+
+    @Override
+    public Long getPosId(Position position) {
+        Long id;
+        if (position.getId() != null) {
+            id = position.getId();
+        } else if (position.getName() != null) {
+            try (Connection connection = dbInitializer.getCpds().getConnection()) {
+                Statement statement = connection.createStatement();
+                try (ResultSet resultSet = statement.executeQuery("SELECT id FROM application.positions WHERE name=" + position.getName())) {
+                    resultSet.next();
+                    id = resultSet.getLong(1);
+                }
+            } catch (SQLException e) {
+                throw new IllegalStateException("Ошибка получения ID", e);
+            }
+        } else {
+            throw new IllegalArgumentException("Не задано обязательного условия для получения ID -POS");
+        }
+        return id;
     }
 
     public static PositionStorage getInstance() {
