@@ -8,9 +8,11 @@ import by.it_academy.service.EmployeeService;
 import java.util.Collection;
 
 public class Main {
+    private static final Main instance = new Main();
     private static EmployeeService service;
 
     public Main() {
+
         service = EmployeeService.getInstance();
     }
 
@@ -20,5 +22,9 @@ public class Main {
         for (Employee employee : employees) {
             System.out.println(employee.toString());
         }
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 }

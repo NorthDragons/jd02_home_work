@@ -12,13 +12,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class EmployeeService implements IEmployerService {
-
-    private static final EmployeeService instance = new EmployeeService();
     private static EmployeeStorage storage;
     private static HEmployeeHelper hEmployeeHelper;
 
     private static DepartmentService departmentService;
     private static PositionService positionService;
+    private static final EmployeeService instance = new EmployeeService();
 
     public EmployeeService() {
         hEmployeeHelper = HEmployeeHelper.getInstance();
@@ -27,9 +26,7 @@ public class EmployeeService implements IEmployerService {
         positionService = PositionService.getInstance();
     }
 
-    public static EmployeeService getInstance() {
-        return instance;
-    }
+
 
     @Override
     public String getPosName(Position position) {
@@ -69,5 +66,10 @@ public class EmployeeService implements IEmployerService {
     @Override
     public Employee onceMapping(ResultSet resultSet) {
         return hEmployeeHelper.onceGetMapping(resultSet);
+    }
+
+
+    public static EmployeeService getInstance() {
+        return instance;
     }
 }

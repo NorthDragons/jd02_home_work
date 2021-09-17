@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeStorage implements IEmployerStorage {
     private static final EmployeeStorage instance = new EmployeeStorage();
     private static DBInitializer dbInitializer;
-    private static EmployeeService employeeService;
+    private static EmployeeService employeeService = new EmployeeService();
 
     public EmployeeStorage() {
         employeeService = EmployeeService.getInstance();
@@ -52,7 +52,7 @@ public class EmployeeStorage implements IEmployerStorage {
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
             try (ResultSet resultSet = statement.executeQuery("SELECT id, name, salary, \"position\", department\n" +
-                    "\tFROM application.employers;" + id)
+                    "\tFROM application.employers WHERE id=" + id)
             ) {
                 employer = employeeService.onceMapping(resultSet);
             }
