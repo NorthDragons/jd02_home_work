@@ -8,13 +8,19 @@ import by.it_academy.storage.DepartmentStorage;
 import java.util.Collection;
 
 public class DepartmentService implements IDepartmentService {
+    private static final DepartmentService instance = new DepartmentService();
     private static DepartmentStorage departmentStorage;
+    private static HDepartmentHepler hDepartmentHepler;
+
+    private static EmployeeService employeeService;
+    private static PositionService positionService;
 
     public DepartmentService() {
+        hDepartmentHepler = HDepartmentHepler.getInstance();
         departmentStorage = DepartmentStorage.getInstance();
+        employeeService = EmployeeService.getInstance();
+        positionService = PositionService.getInstance();
     }
-
-    private static final DepartmentService instance = new DepartmentService();
 
     public static DepartmentService getInstance() {
         return instance;
