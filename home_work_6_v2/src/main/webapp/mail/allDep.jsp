@@ -9,7 +9,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
-<title>Positions</title>
+<title>Departments</title>
 <style>
    .btn {
     display: inline-block; /* Строчно-блочный элемент */
@@ -26,14 +26,14 @@
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
-                    <caption><h2>Сотрудники</h2></caption>
-                    <c:forEach items="${requestScope.allEmployers}"
-                                   			var="employees">
+                    <caption><h2>Отделы</h2></caption>
+                    <c:forEach items="${requestScope.departments}"
+                                   			var="dep">
                                        <tr>
-                                           <td>${employees.id}</td>
-                                           <td>${employees.name}</td>
-                                           <td><a href="${pageContext.request.contextPath}/employee?id=${employees.id}" class="btn">
-                                           Карточка сотрудника</a>
+                                           <td>${dep.id}</td>
+                                           <td>${dep.name}</td>
+                                           <td><a href="${pageContext.request.contextPath}/department?id=${employees.id}" class="btn">
+                                           Карточка Должности</a>
                                            </td>
                                        </tr>
                     </c:forEach>

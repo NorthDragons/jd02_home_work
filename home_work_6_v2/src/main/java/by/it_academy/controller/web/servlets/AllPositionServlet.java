@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 
-@WebServlet(name = "pos", urlPatterns = "/position")
-public class PositionServlet extends HttpServlet {
+@WebServlet(name = "allPos", urlPatterns = "/allPos")
+public class AllPositionServlet extends HttpServlet {
     private static PositionService positionService;
 
-    public PositionServlet() {
+    public AllPositionServlet() {
         positionService = PositionService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Position position = positionService.getPosition(Long.parseLong(req.getParameter("id")));
-        req.setAttribute("position", position);
-        req.getRequestDispatcher("mail/pos.jsp").forward(req, resp);
+
+
+        Collection<Position> positions = positionService.getAllPosition();
+        req.setAttribute("positions", positions);
+        req.getRequestDispatcher("mail/allPos.jsp").forward(req, resp);
+
     }
 }

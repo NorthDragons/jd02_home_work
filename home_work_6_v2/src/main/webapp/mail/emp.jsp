@@ -9,14 +9,14 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
-<title>Positions</title>
+<title>Employee</title>
 </head>
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
-                    <caption><h2>Employers</h2></caption>
+                    <caption><h2>Employee</h2></caption>
 
                                        <tr>
                                            <td>${employee.id}</td><br>

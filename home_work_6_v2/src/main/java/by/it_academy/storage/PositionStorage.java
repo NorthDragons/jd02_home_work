@@ -36,7 +36,7 @@ public class PositionStorage implements IPositionStorage {
                 }
             }
         } catch (SQLException e) {
-            throw new IllegalArgumentException("Ошибка сохранения работника", e);
+            throw new IllegalArgumentException("Ошибка сохранения должности", e);
         }
     }
 
@@ -80,7 +80,7 @@ public class PositionStorage implements IPositionStorage {
     public String getPosName(Position position) {
         String name;
         if (position.getName() != null) {
-            name = position.getName();
+            return position.getName();
         } else if (position.getId() != null) {
             Long id = position.getId();
             try (Connection connection = dbInitializer.getCpds().getConnection()) {
@@ -92,10 +92,10 @@ public class PositionStorage implements IPositionStorage {
             } catch (SQLException e) {
                 throw new IllegalStateException("Ошибка получения имени", e);
             }
+            return name;
         } else {
             throw new IllegalArgumentException("Не задано обязательных параметров для получения Имени -POS");
         }
-        return name;
     }
 
     @Override

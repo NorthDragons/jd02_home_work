@@ -21,8 +21,8 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
-        Employee employee = employeeService.getEmp(id);
+//        Long id = Long.parseLong(req.getParameter("id"));
+        Employee employee = employeeService.getEmp(Long.parseLong(req.getParameter("id")));
         String posName = employeeService.getPosName(employee.getPosition());
         String depName = employeeService.getDepName(employee.getDepartment());
         req.setAttribute("employee", employee);

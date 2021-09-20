@@ -7,8 +7,16 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includedContent").load("test.html");
+    });
+    </script>
+
 <meta charset="utf-8" />
 <title>Hello</title>
+
 <style>
    .btn {
     display: inline-block; /* Строчно-блочный элемент */
@@ -20,8 +28,10 @@
     border-radius: 3px; /* Скругляем уголки */
    }
   </style>
+
 </head>
-<body>
+<body> <jsp:include page="test.jsp" />
+
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
@@ -30,9 +40,9 @@
  <h2>Выбери раздел</h2>
 
 
- <a href="${pageContext.request.contextPath}/department" class="btn">Отделы</a>
- <a href="${pageContext.request.contextPath}/position" class="btn">Должности</a>
- <a href="${pageContext.request.contextPath}/allEmployees" class="btn">Сотрудники</a>
+ <a href="${pageContext.request.contextPath}/allDep" class="btn">Отделы</a>
+ <a href="${pageContext.request.contextPath}/allPos" class="btn">Должности</a>
+ <a href="${pageContext.request.contextPath}/allEmp" class="btn">Сотрудники</a>
                 </form>
             </td></tr>
         </table>

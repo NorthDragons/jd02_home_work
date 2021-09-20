@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet(name = "allEmp", urlPatterns = "/allEmployees")
+@WebServlet(name = "allEmp", urlPatterns = "/allEmp")
 public class AllEmployeeServlet extends HttpServlet {
     private static EmployeeService employeeService;
 

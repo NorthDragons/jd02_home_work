@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class EmployeeService implements IEmployerService {
+
     private static final EmployeeService instance = new EmployeeService();
     private static EmployeeStorage storage;
     private static HEmployeeHelper hEmployeeHelper;

@@ -26,14 +26,14 @@
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
-                    <caption><h2>Сотрудники</h2></caption>
-                    <c:forEach items="${requestScope.allEmployers}"
-                                   			var="employees">
+                    <caption><h2>Должности</h2></caption>
+                    <c:forEach items="${requestScope.positions}"
+                                   			var="pos">
                                        <tr>
-                                           <td>${employees.id}</td>
-                                           <td>${employees.name}</td>
-                                           <td><a href="${pageContext.request.contextPath}/employee?id=${employees.id}" class="btn">
-                                           Карточка сотрудника</a>
+                                           <td>${pos.id}</td>
+                                           <td>${pos.name}</td>
+                                           <td><a href="${pageContext.request.contextPath}/position?id=${employees.id}" class="btn">
+                                           Карточка Должности</a>
                                            </td>
                                        </tr>
                     </c:forEach>
