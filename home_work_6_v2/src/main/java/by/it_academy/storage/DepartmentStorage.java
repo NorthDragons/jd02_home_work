@@ -6,6 +6,8 @@ import by.it_academy.storage.api.IDepartmentStorage;
 
 import java.sql.*;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DepartmentStorage implements IDepartmentStorage {
     private static DBInitializer dbInitializer;
@@ -21,7 +23,7 @@ public class DepartmentStorage implements IDepartmentStorage {
             try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO application.departments(\n" +
                     "name, parent_dep)\n" +
                     "VALUES(?,?);", Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, department.getDName());
+                preparedStatement.setString(1, department.getName());
                 preparedStatement.setLong(2, parentId);
             }
         } catch (SQLException e) {
@@ -32,7 +34,29 @@ public class DepartmentStorage implements IDepartmentStorage {
 
     @Override
     public Collection<Department> getAllDepartment() {
-        return null;
+        List<Department> departments = new LinkedList<>();
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            Statement statement = connection.createStatement();
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.departments")) {
+                while (resultSet.next()) {
+                    Department department = new Department();
+                    department.setId(resultSet.getLong(1));
+                    department.setName(resultSet.getString(2));
+                    if (resultSet.getLong(1) != resultSet.getLong(3)) {
+                        department.setParentDep(this.getDepartment(resultSet.getLong(3)));
+                    } else {
+                        Department parentDep = new Department();
+                        parentDep.setName("Не имеет родительского отдела");
+                        department.setParentDep(parentDep);
+                    }
+                    departments.add(department);
+                }
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);
+        }
+        return departments;
+
     }
 
     @Override
@@ -40,16 +64,19 @@ public class DepartmentStorage implements IDepartmentStorage {
         Department department = new Department();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             final Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.departments WHERE id=" + id)) {
-                department.setId(resultSet.getLong(1));
-                department.setDName(resultSet.getString(2));
-                if (resultSet.getLong(1) != resultSet.getLong(3)) {
-                    department.setParentDep(this.getDepartment(resultSet.getLong(3)));
-                } else {
-                    Department parentDep = new Department();
-                    parentDep.setDName("Не имеет родительского отдела");
-                    department.setParentDep(parentDep);
+            try (ResultSet resultSet = statement.executeQuery("SELECT id, name, parent_dep FROM application.departments WHERE id=" + id)) {
+                while (resultSet.next()){
+                    department.setId(resultSet.getLong(1));
+                    department.setName(resultSet.getString(2));
+                    if (resultSet.getLong(1) != resultSet.getLong(3)) {
+                        department.setParentDep(this.getDepartment(resultSet.getLong(3)));
+                    } else {
+                        Department parentDep = new Department();
+                        parentDep.setName("Не имеет родительского отдела");
+                        department.setParentDep(parentDep);
+                    }
                 }
+
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка работы с базой данных(DEP)", e);
@@ -60,8 +87,8 @@ public class DepartmentStorage implements IDepartmentStorage {
     @Override
     public String getDepName(Department department) {
         String name;
-        if (department.getDName() != null) {
-            return department.getDName();
+        if (department.getName() != null) {
+            return department.getName();
         } else if (department.getId() != null) {
             Long id = department.getId();
             try (Connection connection = dbInitializer.getCpds().getConnection()) {
@@ -84,9 +111,9 @@ public class DepartmentStorage implements IDepartmentStorage {
         Long id;
         if (department.getId() != null) {
             id = department.getId();
-        } else if (department.getDName() != null) {
+        } else if (department.getName() != null) {
             try (Connection connection = dbInitializer.getCpds().getConnection()) {
-                String name = department.getDName();
+                String name = department.getName();
                 Statement statement = connection.createStatement();
                 try (ResultSet resultSet = statement.executeQuery("SELECT id FROM application.positions WHERE name=" + name)) {
                     resultSet.next();

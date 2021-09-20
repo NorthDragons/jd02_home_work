@@ -21,6 +21,8 @@
    }
   </style>
 </head>
+<body> <jsp:include page="test.jsp" />
+
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>

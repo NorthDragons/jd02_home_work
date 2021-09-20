@@ -22,7 +22,9 @@ public class DepartmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Department department = departmentService.getDepartment(Long.parseLong(req.getParameter("id")));
+        Department parentDep= department.getParentDep();
         req.setAttribute("department", department);
+        req.setAttribute("parentDep", parentDep);
         req.getRequestDispatcher("mail/dep.jsp").forward(req, resp);
 
     }

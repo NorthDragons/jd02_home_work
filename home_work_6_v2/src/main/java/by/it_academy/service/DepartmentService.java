@@ -9,11 +9,11 @@ import java.util.Collection;
 
 public class DepartmentService implements IDepartmentService {
     private static final DepartmentService instance = new DepartmentService();
-    private static DepartmentStorage departmentStorage;
-    private static HDepartmentHepler hDepartmentHepler;
+    private final DepartmentStorage departmentStorage;
+    private final HDepartmentHepler hDepartmentHepler;
 
-    private static EmployeeService employeeService;
-    private static PositionService positionService;
+    private final EmployeeService employeeService;
+    private final PositionService positionService;
 
     public DepartmentService() {
         hDepartmentHepler = HDepartmentHepler.getInstance();

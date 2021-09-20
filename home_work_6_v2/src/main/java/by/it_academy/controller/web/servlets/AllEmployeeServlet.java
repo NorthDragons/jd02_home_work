@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @WebServlet(name = "allEmp", urlPatterns = "/allEmp")
 public class AllEmployeeServlet extends HttpServlet {
-    private static EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public AllEmployeeServlet() {
         employeeService = EmployeeService.getInstance();

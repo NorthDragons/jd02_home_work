@@ -4,27 +4,23 @@ package by.it_academy.service;/* created by Kaminskii Ivan
 import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
 import by.it_academy.model.Position;
-import by.it_academy.service.api.IEmployerService;
+import by.it_academy.service.api.INewEmployyService;
 import by.it_academy.storage.EmployeeStorage;
 
 import java.util.Collection;
 
-public class EmployeeService implements IEmployerService {
-    private final static EmployeeService instance = new EmployeeService();
+public class NewEmplyeeService implements INewEmployyService {
+    private static final NewEmplyeeService instance = new NewEmplyeeService();
 
-
-    private final EmployeeStorage storage;
-
-
-    private final DepartmentService departmentService;
+    private final EmployeeStorage employeeStorage;
     private final PositionService positionService;
+    private final DepartmentService departmentService;
 
-    public EmployeeService() {
+    public NewEmplyeeService() {
         departmentService = DepartmentService.getInstance();
-        storage = EmployeeStorage.getInstance();
         positionService = PositionService.getInstance();
+        employeeStorage = EmployeeStorage.getInstance();
     }
-
 
     @Override
     public String getPosName(Position position) {
@@ -47,17 +43,21 @@ public class EmployeeService implements IEmployerService {
     }
 
     @Override
+    public void putEmployee(Employee employee) {
+        employeeStorage.putEmployer(employee);
+    }
+
+    @Override
     public Collection<Employee> getAllEmp() {
-        return storage.getAllEmployers();
+        return employeeStorage.getAllEmployers();
     }
 
     @Override
     public Employee getEmp(Long id) {
-        return storage.getEmployee(id);
+        return employeeStorage.getEmployee(id);
     }
 
-    public static EmployeeService getInstance(){
+    public static NewEmplyeeService getInstance(){
         return instance;
     }
-
 }

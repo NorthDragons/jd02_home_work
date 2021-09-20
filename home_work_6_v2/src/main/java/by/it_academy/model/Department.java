@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 public class Department implements Serializable {
     private Long id;
-    private String dName;
+    private String name;
     private Department parentDep;
 
 }

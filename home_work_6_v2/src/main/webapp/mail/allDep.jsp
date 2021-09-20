@@ -21,6 +21,8 @@
    }
   </style>
 </head>
+<body> <jsp:include page="test.jsp" />
+
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
@@ -32,7 +34,7 @@
                                        <tr>
                                            <td>${dep.id}</td>
                                            <td>${dep.name}</td>
-                                           <td><a href="${pageContext.request.contextPath}/department?id=${employees.id}" class="btn">
+                                           <td><a href="${pageContext.request.contextPath}/department?id=${dep.id}" class="btn">
                                            Карточка Должности</a>
                                            </td>
                                        </tr>

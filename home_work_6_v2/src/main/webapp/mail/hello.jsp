@@ -35,14 +35,12 @@
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
-            <tr><td rowspan="2" style="width:80%">
                 <form align="center">
- <h2>Выбери раздел</h2>
-
-
- <a href="${pageContext.request.contextPath}/allDep" class="btn">Отделы</a>
- <a href="${pageContext.request.contextPath}/allPos" class="btn">Должности</a>
- <a href="${pageContext.request.contextPath}/allEmp" class="btn">Сотрудники</a>
+<tr>
+    <td width="250">Колонка 1</td>
+    <td width="250">Колонка 2</td>
+    <td width="250">Колонка 3</td>
+   </tr>
                 </form>
             </td></tr>
         </table>

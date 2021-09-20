@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class PositionService implements IPositionService {
     private static final PositionService instance = new PositionService();
-    private static PositionStorage positionStorage;
+    private final PositionStorage positionStorage;
 
     public PositionService() {
         positionStorage = PositionStorage.getInstance();

@@ -45,10 +45,12 @@ public class PositionStorage implements IPositionStorage {
         Position position = new Position();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT positions.id positions.name" +
-                    " FROM application.positions WHERE id=" + id)) {
-                position.setId(resultSet.getLong(1));
-                position.setName(resultSet.getString(2));
+            try (ResultSet resultSet = statement.executeQuery("SELECT id, name\n" +
+                    " FROM application.positions WHERE id =" + id)) {
+                while (resultSet.next()){
+                    position.setId(resultSet.getLong(1));
+                    position.setName(resultSet.getString(2));
+                }
             }
         } catch (SQLException e) {
             throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);

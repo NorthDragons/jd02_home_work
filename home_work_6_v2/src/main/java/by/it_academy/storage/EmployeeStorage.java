@@ -1,19 +1,21 @@
 package by.it_academy.storage;/* created by Kaminskii Ivan
  */
 
+import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.service.EmployeeService;
-import by.it_academy.service.HEmployeeHelper;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public class EmployeeStorage implements IEmployerStorage {
     private static final EmployeeStorage instance = new EmployeeStorage();
-    private static DBInitializer dbInitializer;
-    private static EmployeeService employeeService = new EmployeeService();
+    private final DBInitializer dbInitializer;
+    private final EmployeeService employeeService;
 
     public EmployeeStorage() {
         employeeService = EmployeeService.getInstance();
@@ -48,34 +50,80 @@ public class EmployeeStorage implements IEmployerStorage {
 
     @Override
     public Employee getEmployee(Long id) {
-        Employee employer;
+        Employee employee = new Employee();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT id, name, salary, \"position\", department\n" +
-                    "\tFROM application.employers WHERE id=" + id)
+            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, employers.position, employers.department, positions.name, departments.name \n" +
+                    "FROM application.employers \n" +
+                    "\n" +
+                    "JOIN application.positions\n" +
+                    "ON employers.position=positions.id\n" +
+                    "JOIN application.departments\n" +
+                    "ON employers.department=departments.id\n" +
+                    "WHERE employers.id=" + id)
             ) {
-                employer = employeeService.onceMapping(resultSet);
+                while (resultSet.next()) {
+                employee.setId(resultSet.getLong(1));
+                employee.setName(resultSet.getString(2));
+                employee.setSalary(resultSet.getDouble(3));
+
+                Position position = new Position();
+                Long posId = resultSet.getLong(4);
+                position.setId(posId);
+                position.setName(resultSet.getString(6));
+                employee.setPosition(position);
+
+                Department department = new Department();
+                Long depId = resultSet.getLong(5);
+                department.setId(depId);
+                department.setName(resultSet.getString(7));
+                employee.setDepartment(department);
             }
+                }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка работы с базой данных", e);
         }
-        return employer;
+        return employee;
     }
 
     @Override
     public Collection<Employee> getAllEmployers() {
-        List<Employee> employers;
+        List<Employee> employees = new LinkedList<>();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT id, name, salary, \"position\", department\n" +
-                    "\tFROM application.employers;")) {
-                HEmployeeHelper hEmploeeHelper = HEmployeeHelper.getInstance();
-                employers = hEmploeeHelper.allGetMapping(resultSet);
+            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, employers.position, employers.department, positions.name, departments.name\n" +
+                    "                    FROM application.employers\n" +
+                    "                    JOIN application.positions\n" +
+                    "                    ON employers.position=positions.id\n" +
+                    "                    JOIN application.departments\n" +
+                    "                    ON employers.department=departments.id"
+                    )) {
+                while (resultSet.next()) {
+                    Employee employer = new Employee();
+                    employer.setId(resultSet.getLong(1));
+                    employer.setName(resultSet.getString(2));
+                    employer.setSalary(resultSet.getDouble(3));
+
+                    Position position = new Position();
+                    Long posId = resultSet.getLong(4);
+                    position.setId(posId);
+
+                    position.setName(resultSet.getString(6));
+                    employer.setPosition(position);
+
+                    Department department = new Department();
+                    Long depId = resultSet.getLong(5);
+                    department.setId(depId);
+                    department.setName(resultSet.getString(7));
+                    employer.setDepartment(department);
+
+                    employees.add(employer);
+                }
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка подключения к базе данных", e);
         }
-        return employers;
+        return employees;
     }
 
     public static EmployeeStorage getInstance() {

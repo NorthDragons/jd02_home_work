@@ -1,16 +1,12 @@
-package by.it_academy.service.api;/* created by Kaminskii Ivan
- */
+package by.it_academy.service.api;
 
 import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
 import by.it_academy.model.Position;
 
-import java.sql.ResultSet;
 import java.util.Collection;
-import java.util.List;
 
-public interface IEmployerService {
-
+public interface INewEmployyService {
 
     String getPosName(Position position);
     Long getPosId(Position position);
@@ -18,9 +14,10 @@ public interface IEmployerService {
     String getDepName(Department department);
     Long getDepId(Department department);
 
+
+    void putEmployee(Employee employee);
+
     Collection<Employee> getAllEmp();
 
     Employee getEmp(Long id);
-
-
 }
