@@ -25,6 +25,7 @@ public class EmployeeServlet extends HttpServlet {
         Employee employee = employeeService.getEmp(Long.parseLong(req.getParameter("id")));
         String posName = employeeService.getPosName(employee.getPosition());
         String depName = employeeService.getDepName(employee.getDepartment());
+
         req.setAttribute("employee", employee);
         req.setAttribute("position", posName);
         req.setAttribute("department", depName);

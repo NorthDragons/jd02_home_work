@@ -11,4 +11,7 @@ public interface IEmployerStorage {
 
     Collection<Employee> getAllEmployers(Long limit, Long offset);
 
+    Long getMaxPage(Long limit);
+
+
 }

@@ -5,17 +5,17 @@ import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
 import by.it_academy.model.Position;
 
-import java.sql.ResultSet;
 import java.util.Collection;
-import java.util.List;
 
 public interface IEmployerService {
 
 
     String getPosName(Position position);
+
     Long getPosId(Position position);
 
     String getDepName(Department department);
+
     Long getDepId(Department department);
 
     Collection<Employee> getAllEmp(Long limit, Long offset);
@@ -23,4 +23,7 @@ public interface IEmployerService {
     Employee getEmp(Long id);
 
     Long getOffset(Long page, Long limit);
+
+    Long getMaxPage(Long limit);
+
 }

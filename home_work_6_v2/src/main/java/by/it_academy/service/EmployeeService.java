@@ -64,6 +64,11 @@ public class EmployeeService implements IEmployerService {
         return (page - 1L) * limit;
     }
 
+    @Override
+    public Long getMaxPage(Long limit) {
+        return storage.getMaxPage(limit);
+    }
+
     public static EmployeeService getInstance() {
         return instance;
     }

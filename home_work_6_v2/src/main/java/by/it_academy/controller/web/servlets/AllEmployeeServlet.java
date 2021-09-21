@@ -24,14 +24,14 @@ public class AllEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long page = Long.parseLong(req.getParameter("page"));
         Long limit = 20L;
+        Long maxPage = employeeService.getMaxPage(limit);
         Long offset = employeeService.getOffset(page, limit);
 
         Collection<Employee> employees = employeeService.getAllEmp(limit, offset);
         req.setAttribute("allEmployers", employees);
         req.setAttribute("active", 4);
-//        req.setAttribute("activeDep", false);
-//        req.setAttribute("activePos", false);
-//        req.setAttribute("activeHello", false);
+        req.setAttribute("page",page);
+        req.setAttribute("maxPage", maxPage);
 
         req.getRequestDispatcher("mail/allEmp.jsp").forward(req, resp);
     }

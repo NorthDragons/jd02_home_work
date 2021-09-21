@@ -22,44 +22,11 @@
      <tr> <td>
 
 <div class="topnav">
-<c:set var="active" value="${active}"/>
-<c:choose>
-    <c:when test="${active==1}">
-              <a class="active" href="${pageContext.request.contextPath}/">Главная</a>
-              <a href="${pageContext.request.contextPath}/allDep">Отделы</a>
-              <a href="${pageContext.request.contextPath}/allPos">Должности</a>
-              <a href="${pageContext.request.contextPath}/allEmp">Сотрудники</a>
-    </c:when>
-    <c:when test="${active==2}">
-              <a href="${pageContext.request.contextPath}/">Главная</a>
-              <a class="active" href="${pageContext.request.contextPath}/allDep">Отделы</a>
-              <a href="${pageContext.request.contextPath}/allPos">Должности</a>
-              <a href="${pageContext.request.contextPath}/allEmp">Сотрудники</a>
-    </c:when>
-    <c:when test="${active==3}">
-              <a href="${pageContext.request.contextPath}/">Главная</a>
-              <a href="${pageContext.request.contextPath}/allDep">Отделы</a>
-              <a class="active" href="${pageContext.request.contextPath}/allPos">Должности</a>
-              <a href="${pageContext.request.contextPath}/allEmp">Сотрудники</a>
-    </c:when>
-    <c:when test="${active==4}">
-              <a href="${pageContext.request.contextPath}/">Главная</a>
-              <a href="${pageContext.request.contextPath}/allDep">Отделы</a>
-              <a href="${pageContext.request.contextPath}/allPos">Должности</a>
-              <a class="active" href="${pageContext.request.contextPath}/allEmp">Сотрудники</a>
-    </c:when>
-    <c:otherwise>
-              <a href="${pageContext.request.contextPath}/">Главная</a>
-              <a href="${pageContext.request.contextPath}/allDep">Отделы</a>
-              <a href="${pageContext.request.contextPath}/allPos">Должности</a>
-              <a href="${pageContext.request.contextPath}/allEmp">Сотрудники</a>
-    </c:otherwise>
-</c:choose>
-
-
+    <a <c:if test="${active==1}">class="active"</c:if> href="${pageContext.request.contextPath}/">Главная</a>
+    <a <c:if test="${active==2}">class="active"</c:if> href="${pageContext.request.contextPath}/allDep">Отделы</a>
+    <a <c:if test="${active==3}">class="active"</c:if> href="${pageContext.request.contextPath}/allPos">Должности</a>
+    <a <c:if test="${active==4}">class="active"</c:if> href="${pageContext.request.contextPath}/allEmp?page=1">Сотрудники</a>
 </div>
-
-
 </td></tr>
 </table>
 </body>

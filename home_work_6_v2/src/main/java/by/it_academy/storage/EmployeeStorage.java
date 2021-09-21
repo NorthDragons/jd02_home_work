@@ -1,15 +1,13 @@
 package by.it_academy.storage;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
-import by.it_academy.model.Position;
+import by.it_academy.service.EmployeeMapper;
 import by.it_academy.service.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class EmployeeStorage implements IEmployerStorage {
@@ -50,10 +48,11 @@ public class EmployeeStorage implements IEmployerStorage {
 
     @Override
     public Employee getEmployee(Long id) {
-        Employee employee = new Employee();
+        Employee employee;
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, employers.position, employers.department, positions.name, departments.name \n" +
+            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, " +
+                    "employers.position, employers.department, positions.name, departments.name \n" +
                     "FROM application.employers \n" +
                     "\n" +
                     "JOIN application.positions\n" +
@@ -62,23 +61,8 @@ public class EmployeeStorage implements IEmployerStorage {
                     "ON employers.department=departments.id\n" +
                     "WHERE employers.id=" + id)
             ) {
-                while (resultSet.next()) {
-                    employee.setId(resultSet.getLong(1));
-                    employee.setName(resultSet.getString(2));
-                    employee.setSalary(resultSet.getDouble(3));
-
-                    Position position = new Position();
-                    Long posId = resultSet.getLong(4);
-                    position.setId(posId);
-                    position.setName(resultSet.getString(6));
-                    employee.setPosition(position);
-
-                    Department department = new Department();
-                    Long depId = resultSet.getLong(5);
-                    department.setId(depId);
-                    department.setName(resultSet.getString(7));
-                    employee.setDepartment(department);
-                }
+                EmployeeMapper employeeMapper = EmployeeMapper.getInstance();
+                employee = employeeMapper.onceGetMapping(resultSet);
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка работы с базой данных", e);
@@ -88,9 +72,10 @@ public class EmployeeStorage implements IEmployerStorage {
 
     @Override
     public Collection<Employee> getAllEmployers(Long limit, Long offset) {
-        List<Employee> employees = new LinkedList<>();
+        List<Employee> employees;
         try (Connection connection = dbInitializer.getCpds().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT employers.id, employers.name, employers.salary,employers.position, employers.department, positions.name, departments.name\n" +
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT employers.id, employers.name, employers.salary," +
+                     "employers.position, employers.department, positions.name, departments.name\n" +
                      "FROM application.employers\n" +
                      "JOIN application.positions\n" +
                      "ON employers.position=positions.id\n" +
@@ -101,32 +86,32 @@ public class EmployeeStorage implements IEmployerStorage {
             preparedStatement.setLong(1, limit);
             preparedStatement.setLong(2, offset);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Employee employer = new Employee();
-                    employer.setId(resultSet.getLong(1));
-                    employer.setName(resultSet.getString(2));
-                    employer.setSalary(resultSet.getDouble(3));
-
-                    Position position = new Position();
-                    Long posId = resultSet.getLong(4);
-                    position.setId(posId);
-
-                    position.setName(resultSet.getString(6));
-                    employer.setPosition(position);
-
-                    Department department = new Department();
-                    Long depId = resultSet.getLong(5);
-                    department.setId(depId);
-                    department.setName(resultSet.getString(7));
-                    employer.setDepartment(department);
-
-                    employees.add(employer);
-                }
+                EmployeeMapper employeeMapper = EmployeeMapper.getInstance();
+                employees = employeeMapper.allGetMapping(resultSet);
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка подключения к базе данных", e);
         }
         return employees;
+    }
+
+    @Override
+    public Long getMaxPage(Long limit) {
+        long maxPage = 0L;
+        try (Connection connection = dbInitializer.getCpds().getConnection(); Statement statement = connection.createStatement()) {
+            try (ResultSet resultSet = statement.executeQuery("SELECT COUNT(id)\n" +
+                    "FROM application.employers")) {
+                while (resultSet.next()) {
+                    long allLine = resultSet.getLong(1);
+
+                    float aFloat = ((float) allLine / (float) limit);
+                    maxPage = (long) Math.ceil(aFloat);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxPage;
     }
 
     public static EmployeeStorage getInstance() {
