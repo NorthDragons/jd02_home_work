@@ -9,6 +9,6 @@ public interface IEmployerStorage {
 
     Employee getEmployee(Long id);
 
-    Collection<Employee> getAllEmployers();
+    Collection<Employee> getAllEmployers(Long limit, Long offset);
 
 }

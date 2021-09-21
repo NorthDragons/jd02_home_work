@@ -26,6 +26,11 @@ public class AllPositionServlet extends HttpServlet {
 
         Collection<Position> positions = positionService.getAllPosition();
         req.setAttribute("positions", positions);
+        req.setAttribute("active", 3);
+//        req.setAttribute("activeHello", false);
+//        req.setAttribute("activeDep", false);
+//        req.setAttribute("activeEmp", false);
+
         req.getRequestDispatcher("mail/allPos.jsp").forward(req, resp);
 
     }

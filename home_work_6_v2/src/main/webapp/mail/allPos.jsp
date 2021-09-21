@@ -11,17 +11,11 @@
 <meta charset="utf-8" />
 <title>Positions</title>
 <style>
-   .btn {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #8C959D; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
+         <%@include file="/css/buttonStyle.css" %>
    }
   </style>
 </head>
-<body> <jsp:include page="test.jsp" />
+<body> <jsp:include page="topMenu.jsp" />
 
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
@@ -43,7 +37,10 @@
         </table>
      </td></tr>
 </table>
-
-
-
 </body>
+
+<body> <jsp:include page="paginate.jsp" />
+
+
+
+</html>

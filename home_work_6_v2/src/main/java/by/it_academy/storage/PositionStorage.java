@@ -56,7 +56,7 @@ public class PositionStorage implements IPositionStorage {
             throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);
         }
 
-        return null;
+        return position;
     }
 
     @Override

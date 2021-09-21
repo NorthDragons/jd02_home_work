@@ -25,6 +25,10 @@ public class AllDepServlet extends HttpServlet {
 
         Collection<Department> departments = departmentService.getAllDepartment();
         req.setAttribute("departments", departments);
+        req.setAttribute("active", 2);
+//        req.setAttribute("activeEmp", false);
+//        req.setAttribute("activePos", false);
+//        req.setAttribute("activeHello", false);
         req.getRequestDispatcher("mail/allDep.jsp").forward(req, resp);
     }
 }

@@ -18,9 +18,9 @@ public interface IEmployerService {
     String getDepName(Department department);
     Long getDepId(Department department);
 
-    Collection<Employee> getAllEmp();
+    Collection<Employee> getAllEmp(Long limit, Long offset);
 
     Employee getEmp(Long id);
 
-
+    Long getOffset(Long page, Long limit);
 }

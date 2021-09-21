@@ -47,8 +47,8 @@ public class EmployeeService implements IEmployerService {
     }
 
     @Override
-    public Collection<Employee> getAllEmp() {
-        return storage.getAllEmployers();
+    public Collection<Employee> getAllEmp(Long limit, Long offset) {
+        return storage.getAllEmployers(limit, offset);
     }
 
     @Override
@@ -56,7 +56,15 @@ public class EmployeeService implements IEmployerService {
         return storage.getEmployee(id);
     }
 
-    public static EmployeeService getInstance(){
+    @Override
+    public Long getOffset(Long page, Long limit) {
+        if(page==0){
+            return page;
+        }
+        return (page - 1L) * limit;
+    }
+
+    public static EmployeeService getInstance() {
         return instance;
     }
 

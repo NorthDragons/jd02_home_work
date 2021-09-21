@@ -18,28 +18,20 @@
 <title>Hello</title>
 
 <style>
-   .btn {
-    display: inline-block; /* Строчно-блочный элемент */
-    width: 200px;
-    background: #8C959D; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-   }
-  </style>
+      <%@include file="/css/buttonStyle.css" %>
+</style>
 
 </head>
-<body> <jsp:include page="test.jsp" />
+<body> <jsp:include page="topMenu.jsp" />
 
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
 <tr>
-    <td width="250">Колонка 1</td>
-    <td width="250">Колонка 2</td>
-    <td width="250">Колонка 3</td>
+    <td width="250"><h2>Информация по Отделам </h2></td>
+    <td width="250"><h2>Информация по Должностям </h2></td>
+    <td width="250"><h2>Информация по Сотрудникам </h2></td>
    </tr>
                 </form>
             </td></tr>

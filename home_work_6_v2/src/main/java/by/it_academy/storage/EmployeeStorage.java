@@ -63,23 +63,23 @@ public class EmployeeStorage implements IEmployerStorage {
                     "WHERE employers.id=" + id)
             ) {
                 while (resultSet.next()) {
-                employee.setId(resultSet.getLong(1));
-                employee.setName(resultSet.getString(2));
-                employee.setSalary(resultSet.getDouble(3));
+                    employee.setId(resultSet.getLong(1));
+                    employee.setName(resultSet.getString(2));
+                    employee.setSalary(resultSet.getDouble(3));
 
-                Position position = new Position();
-                Long posId = resultSet.getLong(4);
-                position.setId(posId);
-                position.setName(resultSet.getString(6));
-                employee.setPosition(position);
+                    Position position = new Position();
+                    Long posId = resultSet.getLong(4);
+                    position.setId(posId);
+                    position.setName(resultSet.getString(6));
+                    employee.setPosition(position);
 
-                Department department = new Department();
-                Long depId = resultSet.getLong(5);
-                department.setId(depId);
-                department.setName(resultSet.getString(7));
-                employee.setDepartment(department);
-            }
+                    Department department = new Department();
+                    Long depId = resultSet.getLong(5);
+                    department.setId(depId);
+                    department.setName(resultSet.getString(7));
+                    employee.setDepartment(department);
                 }
+            }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка работы с базой данных", e);
         }
@@ -87,17 +87,20 @@ public class EmployeeStorage implements IEmployerStorage {
     }
 
     @Override
-    public Collection<Employee> getAllEmployers() {
+    public Collection<Employee> getAllEmployers(Long limit, Long offset) {
         List<Employee> employees = new LinkedList<>();
-        try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT employers.id, employers.name, employers.salary, employers.position, employers.department, positions.name, departments.name\n" +
-                    "                    FROM application.employers\n" +
-                    "                    JOIN application.positions\n" +
-                    "                    ON employers.position=positions.id\n" +
-                    "                    JOIN application.departments\n" +
-                    "                    ON employers.department=departments.id"
-                    )) {
+        try (Connection connection = dbInitializer.getCpds().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT employers.id, employers.name, employers.salary,employers.position, employers.department, positions.name, departments.name\n" +
+                     "FROM application.employers\n" +
+                     "JOIN application.positions\n" +
+                     "ON employers.position=positions.id\n" +
+                     "JOIN application.departments\n" +
+                     "ON employers.department=departments.id\n" +
+                     "ORDER BY id ASC\n" +
+                     "LIMIT ? OFFSET ?")) {
+            preparedStatement.setLong(1, limit);
+            preparedStatement.setLong(2, offset);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Employee employer = new Employee();
                     employer.setId(resultSet.getLong(1));

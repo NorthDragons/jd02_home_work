@@ -22,8 +22,17 @@ public class AllEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Collection<Employee> employees = employeeService.getAllEmp();
+        Long page = Long.parseLong(req.getParameter("page"));
+        Long limit = 20L;
+        Long offset = employeeService.getOffset(page, limit);
+
+        Collection<Employee> employees = employeeService.getAllEmp(limit, offset);
         req.setAttribute("allEmployers", employees);
+        req.setAttribute("active", 4);
+//        req.setAttribute("activeDep", false);
+//        req.setAttribute("activePos", false);
+//        req.setAttribute("activeHello", false);
+
         req.getRequestDispatcher("mail/allEmp.jsp").forward(req, resp);
     }
 }

@@ -49,7 +49,8 @@ public class NewEmplyeeService implements INewEmployyService {
 
     @Override
     public Collection<Employee> getAllEmp() {
-        return employeeStorage.getAllEmployers();
+//        return employeeStorage.getAllEmployers();
+    return null;
     }
 
     @Override
