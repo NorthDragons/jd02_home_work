@@ -24,7 +24,7 @@ public class AllEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long page = Long.parseLong(req.getParameter("page"));
 
-        Long limit = 20L;
+        Long limit = 15L;
         Long offset = employeeService.getOffset(page, limit);
         Long maxPage = employeeService.getMaxPage(limit);
 

@@ -1,7 +1,9 @@
 package by.it_academy;/* created by Kaminskii Ivan
  */
 
+import by.it_academy.storage.CreatDB;
 import by.it_academy.storage.DBInitializer;
+import by.it_academy.storage.api.DBCreator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +14,12 @@ public class Main {
     private static final DBInitializer dbInitializer = DBInitializer.getInstance();
 
     public static void main(String[] args) {
-        long i= 19L;
-        long b=2L;
-        float aFloat =((float)19L/ (float) 2L);
-        System.out.println(Math.ceil(aFloat));
+        DBCreator dbCreator = new CreatDB();
 
-
-
+//        dbCreator.newDB("name");
+        dbCreator.depTable();
+        dbCreator.posTable();
+        dbCreator.empTable();
 
 //        try (Connection connection =dbInitializer.getCpds().getConnection();
 //             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, name, salary FROM application.employers ORDER BY id ASC LIMIT ? OFFSET ?")) {
