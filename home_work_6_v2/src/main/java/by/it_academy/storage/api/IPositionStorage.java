@@ -14,4 +14,6 @@ public interface IPositionStorage {
     String getPosName(Position position);
 
     Long getPosId(Position position);
+
+    Long getMaxPage(Long limit);
 }

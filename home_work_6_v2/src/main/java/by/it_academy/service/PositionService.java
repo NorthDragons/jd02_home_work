@@ -43,4 +43,17 @@ public class PositionService implements IPositionService {
     public Long getPosId(Position position) {
         return positionStorage.getPosId(position);
     }
+
+    @Override
+    public Long getOffset(Long page, Long limit) {
+        if(page==0){
+            return page;
+        }
+        return (page - 1L) * limit;
+    }
+
+    @Override
+    public Long getMaxPage(Long limit) {
+        return positionStorage.getMaxPage(limit);
+    }
 }

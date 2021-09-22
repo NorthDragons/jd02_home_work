@@ -22,14 +22,17 @@ public class AllPositionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long page = Long.parseLong(req.getParameter("page"));
 
+        Long limit = 20L;
+        Long offset = positionService.getOffset(page, limit);
+        Long maxPage = positionService.getMaxPage(limit);
 
         Collection<Position> positions = positionService.getAllPosition();
         req.setAttribute("positions", positions);
         req.setAttribute("active", 3);
-//        req.setAttribute("activeHello", false);
-//        req.setAttribute("activeDep", false);
-//        req.setAttribute("activeEmp", false);
+        req.setAttribute("page",page);
+        req.setAttribute("maxPage", maxPage);
 
         req.getRequestDispatcher("mail/allPos.jsp").forward(req, resp);
 

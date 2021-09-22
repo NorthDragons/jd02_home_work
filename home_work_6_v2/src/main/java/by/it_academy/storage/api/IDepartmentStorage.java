@@ -15,4 +15,6 @@ public interface IDepartmentStorage {
     String getDepName(Department department);
 
     Long getDepId(Department department);
+
+    Long getMaxPage(Long limit);
 }

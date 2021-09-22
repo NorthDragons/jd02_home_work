@@ -15,4 +15,8 @@ public interface IDepartmentService {
     String getDepName(Department department);
 
     Long getDepId(Department department);
+
+    Long getOffset(Long page, Long limit);
+
+    Long getMaxPage(Long limit);
 }

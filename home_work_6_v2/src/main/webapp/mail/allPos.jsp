@@ -39,8 +39,6 @@
 </table>
 </body>
 
-<body> <jsp:include page="paginate.jsp" />
-
-
+<body> <jsp:include page="pagin/paginate.jsp" />
 
 </html>

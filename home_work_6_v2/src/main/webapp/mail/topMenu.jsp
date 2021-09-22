@@ -23,8 +23,8 @@
 
 <div class="topnav">
     <a <c:if test="${active==1}">class="active"</c:if> href="${pageContext.request.contextPath}/">Главная</a>
-    <a <c:if test="${active==2}">class="active"</c:if> href="${pageContext.request.contextPath}/allDep">Отделы</a>
-    <a <c:if test="${active==3}">class="active"</c:if> href="${pageContext.request.contextPath}/allPos">Должности</a>
+    <a <c:if test="${active==2}">class="active"</c:if> href="${pageContext.request.contextPath}/allDep?page=1">Отделы</a>
+    <a <c:if test="${active==3}">class="active"</c:if> href="${pageContext.request.contextPath}/allPos?page=1">Должности</a>
     <a <c:if test="${active==4}">class="active"</c:if> href="${pageContext.request.contextPath}/allEmp?page=1">Сотрудники</a>
 </div>
 </td></tr>

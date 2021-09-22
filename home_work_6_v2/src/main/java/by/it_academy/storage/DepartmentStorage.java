@@ -128,6 +128,26 @@ public class DepartmentStorage implements IDepartmentStorage {
         return id;
     }
 
+
+    @Override
+    public Long getMaxPage(Long limit) {
+        long maxPage = 0L;
+        try (Connection connection = dbInitializer.getCpds().getConnection(); Statement statement = connection.createStatement()) {
+            try (ResultSet resultSet = statement.executeQuery("SELECT COUNT(id)\n" +
+                    "FROM application.departments")) {
+                while (resultSet.next()) {
+                    long allLine = resultSet.getLong(1);
+
+                    float aFloat = ((float) allLine / (float) limit);
+                    maxPage = (long) Math.ceil(aFloat);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxPage;
+    }
+
     public static DepartmentStorage getInstance() {
         return instance;
     }

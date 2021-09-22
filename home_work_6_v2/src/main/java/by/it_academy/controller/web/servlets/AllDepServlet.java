@@ -22,13 +22,19 @@ public class AllDepServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long page = Long.parseLong(req.getParameter("page"));
+
+        Long limit = 20L;
+        Long offset = departmentService.getOffset(page, limit);
+        Long maxPage = departmentService.getMaxPage(limit);
+
 
         Collection<Department> departments = departmentService.getAllDepartment();
         req.setAttribute("departments", departments);
         req.setAttribute("active", 2);
-//        req.setAttribute("activeEmp", false);
-//        req.setAttribute("activePos", false);
-//        req.setAttribute("activeHello", false);
+        req.setAttribute("page",page);
+        req.setAttribute("maxPage", maxPage);
+
         req.getRequestDispatcher("mail/allDep.jsp").forward(req, resp);
     }
 }

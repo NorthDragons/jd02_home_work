@@ -14,4 +14,8 @@ public interface IPositionService {
     String getPosName(Position position);
 
     Long getPosId(Position position);
+
+    Long getOffset(Long page, Long limit);
+
+    Long getMaxPage(Long limit);
 }

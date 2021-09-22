@@ -50,4 +50,17 @@ public class DepartmentService implements IDepartmentService {
     public Long getDepId(Department department) {
         return departmentStorage.getDepId (department);
     }
+
+    @Override
+    public Long getOffset(Long page, Long limit) {
+        if(page==0){
+            return page;
+        }
+        return (page - 1L) * limit;
+    }
+
+    @Override
+    public Long getMaxPage(Long limit) {
+        return departmentStorage.getMaxPage(limit);
+    }
 }
