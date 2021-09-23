@@ -9,6 +9,7 @@ import java.util.Collection;
 
 public interface IEmployerService {
 
+    Long putEmployer(Employee employer);
 
     String getPosName(Position position);
 

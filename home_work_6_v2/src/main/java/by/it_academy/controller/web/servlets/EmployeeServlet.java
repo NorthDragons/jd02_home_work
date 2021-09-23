@@ -1,7 +1,9 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
+import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,9 +38,21 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee employee = mapper.readValue(req.getInputStream(), Employee.class);
+        Employee employee = Employee.getInstance();
+        Department department = Department.getInstance();
+        Position position = Position.getInstance();
 
-
-        super.doPost(req, resp);
+        String name = req.getParameter("name");
+        Double salary = Double.parseDouble(req.getParameter("salary"));
+        Long posId = Long.parseLong(req.getParameter("posId"));
+        Long depId = Long.parseLong(req.getParameter("depId"));
+        employee.setName(name);
+        employee.setSalary(salary);
+        department.setId(depId);
+        position.setId(posId);
+        employee.setDepartment(department);
+        employee.setPosition(position);
+        final Long empId = employeeService.putEmployer(employee);
+        resp.sendRedirect(req.getContextPath() + "/employee?id="+empId);
     }
 }

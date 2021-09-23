@@ -5,7 +5,7 @@ import by.it_academy.model.Employee;
 import java.util.Collection;
 
 public interface IEmployerStorage {
-    void putEmployer(Employee employer);
+    Long putEmployer(Employee employer);
 
     Employee getEmployee(Long id);
 

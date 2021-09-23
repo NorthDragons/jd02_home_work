@@ -46,13 +46,8 @@
                 <ul>
 			         <li><a href="${pageContext.request.contextPath}/allEmp?page=1">Все сотрудники</a></li>
 			         <li><a href="#">Карточка сотрудника</a></li>
-			         <li><a href="#">Добавить</a>
-			            <ul>
-			                <li><a href="#">Добавить одного сотрудника</a></li>
-			                <li><a href="#">Добавить несколько сотрудников</a></li>
-			                <li><a href="#">Сгенерировать сотрудников</a></li>
-			            </ul>
-			         </li>
+			         <li><a href="${pageContext.request.contextPath}/addNewEmp">Добавить сотрудника</a></li>
+		             <li><a href="#">Сгенерировать сотрудников</a></li>
 			         <li><a href="#">Редактировать сотрудника</a></li>
 			    </ul>
         </li>

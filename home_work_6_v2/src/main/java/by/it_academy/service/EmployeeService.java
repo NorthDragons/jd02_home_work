@@ -27,6 +27,11 @@ public class EmployeeService implements IEmployerService {
 
 
     @Override
+    public Long putEmployer(Employee employer) {
+        return storage.putEmployer(employer);
+    }
+
+    @Override
     public String getPosName(Position position) {
         return positionService.getPosName(position);
     }

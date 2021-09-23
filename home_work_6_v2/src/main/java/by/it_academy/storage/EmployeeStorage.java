@@ -1,7 +1,9 @@
 package by.it_academy.storage;/* created by Kaminskii Ivan
  */
 
+import by.it_academy.model.Department;
 import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.service.EmployeeMapper;
 import by.it_academy.service.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
@@ -20,7 +22,10 @@ public class EmployeeStorage implements IEmployerStorage {
         dbInitializer = DBInitializer.getInstance();
     }
 
-    public void putEmployer(Employee employer) {
+    public Long putEmployer(Employee employer) {
+        Department department= employer.getDepartment();
+        Position position= employer.getPosition();
+
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement("INSERT INTO application.employers(\n" +
@@ -29,15 +34,14 @@ public class EmployeeStorage implements IEmployerStorage {
             ) {
                 preparedStatement.setString(1, employer.getName());
                 preparedStatement.setDouble(2, employer.getSalary());
-                preparedStatement.setLong(3, employeeService.getPosId(employer.getPosition()));
-                preparedStatement.setLong(4, employeeService.getDepId(employer.getDepartment()));
+                preparedStatement.setLong(3, position.getId());
+                preparedStatement.setLong(4, department.getId());
                 preparedStatement.executeUpdate();
 
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                    while (generatedKeys.next()) {
-                        employer.setId(generatedKeys.getLong(1));
-                    }
-
+                    generatedKeys.next();
+                    employer.setId(generatedKeys.getLong(1));
+                    return generatedKeys.getLong(1);
                 }
             }
         } catch (SQLException e) {
