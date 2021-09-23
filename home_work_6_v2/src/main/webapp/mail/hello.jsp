@@ -19,10 +19,11 @@
 
 <style>
       <%@include file="/css/buttonStyle.css" %>
+
 </style>
 
 </head>
-<body> <jsp:include page="topMenu.jsp" />
+<body> <jsp:include page="topMenuDrop.jsp" />
 
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>

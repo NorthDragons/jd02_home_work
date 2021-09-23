@@ -1,6 +1,6 @@
-package by.it_academy.home_work2.controller;
+package controller;
 
-import by.it_academy.home_work2.service.VoteService;
+import service.VoteService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

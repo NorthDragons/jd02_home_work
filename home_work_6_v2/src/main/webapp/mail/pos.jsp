@@ -11,7 +11,7 @@
 <meta charset="utf-8" />
 <title>Position</title>
 </head>
-<body> <jsp:include page="topMenu.jsp" />
+<body> <jsp:include page="topMenuDrop.jsp" />
 
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">

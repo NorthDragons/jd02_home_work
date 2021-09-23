@@ -1,4 +1,4 @@
-package by.it_academy.home_work2.service;
+package service;
 
 
 import by.it_academy.home_work2.storage.VoteStorage;
