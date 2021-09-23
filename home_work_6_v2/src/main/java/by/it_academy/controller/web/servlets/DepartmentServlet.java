@@ -22,10 +22,20 @@ public class DepartmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Department department = departmentService.getDepartment(Long.parseLong(req.getParameter("id")));
-        Department parentDep= department.getParentDep();
+        Department parentDep = department.getParentDep();
         req.setAttribute("department", department);
         req.setAttribute("parentDep", parentDep);
         req.getRequestDispatcher("mail/dep.jsp").forward(req, resp);
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        Long parId = Long.parseLong(req.getParameter("parId"));
+        Department department = Department.getInstance();
+        department.setName(name);
+        Long depId = departmentService.putDepartment(department, parId);
+        resp.sendRedirect(req.getContextPath() + "/department?id=" + depId);
     }
 }

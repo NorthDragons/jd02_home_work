@@ -5,7 +5,7 @@ import by.it_academy.model.Position;
 import java.util.Collection;
 
 public interface IPositionService {
-    void putPosition(Position position);
+    Long putPosition(Position position);
 
     Position getPosition(Long id);
 

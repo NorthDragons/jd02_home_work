@@ -18,7 +18,7 @@ public class PositionStorage implements IPositionStorage {
     }
 
     @Override
-    public void putPosition(Position position) {
+    public Long putPosition(Position position) {
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement("INSERT INTO application.positions(\n" +
@@ -32,7 +32,7 @@ public class PositionStorage implements IPositionStorage {
                     while (generatedKeys.next()) {
                         position.setId(generatedKeys.getLong(1));
                     }
-
+                    return position.getId();
                 }
             }
         } catch (SQLException e) {

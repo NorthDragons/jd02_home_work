@@ -27,8 +27,8 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public void putDepartment(Department department, Long parentId) {
-        departmentStorage.putDepartment(department, parentId);
+    public Long putDepartment(Department name, Long parentId) {
+        return departmentStorage.putDepartment(name, parentId);
     }
 
     @Override

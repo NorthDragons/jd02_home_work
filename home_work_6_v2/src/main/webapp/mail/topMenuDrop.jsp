@@ -28,7 +28,7 @@
                 <ul>
 	                <li><a href="${pageContext.request.contextPath}/allDep?page=1">Все отделы</a></li>
 	                <li><a href="#">Карточка отдела</a></li>
-	                <li><a href="#">Добавить отдел</a></li>
+	                <li><a href="${pageContext.request.contextPath}/addNewDep">Добавить отдел</a></li>
 	                <li><a href="#">Редактировать отдел</a></li>
 	            </ul>
         </li>
@@ -37,7 +37,7 @@
               	<ul>
 	                <li><a href="${pageContext.request.contextPath}/allPos?page=1">Все должности</a></li>
 	                <li><a href="#">Карточка должности</a></li>
-	                <li><a href="#">Добавить должность</a></li>
+	                <li><a href="${pageContext.request.contextPath}/addNewPos">Добавить должность</a></li>
 	                <li><a href="#">Редактировать должность</a></li>
 	            </ul>
         </li>

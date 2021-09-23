@@ -18,16 +18,23 @@ public class DepartmentStorage implements IDepartmentStorage {
     }
 
     @Override
-    public void putDepartment(Department department, Long parentId) {
+    public Long putDepartment(Department department, Long parentId) {
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO application.departments(\n" +
                     "name, parent_dep)\n" +
                     "VALUES(?,?);", Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, department.getName());
                 preparedStatement.setLong(2, parentId);
+                preparedStatement.executeUpdate();
+
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    generatedKeys.next();
+                    department.setId(generatedKeys.getLong(1));
+                    return generatedKeys.getLong(1);
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка добавления отдела в БД",e);
         }
 
     }

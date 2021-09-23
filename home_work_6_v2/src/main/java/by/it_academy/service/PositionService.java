@@ -20,8 +20,8 @@ public class PositionService implements IPositionService {
     }
 
     @Override
-    public void putPosition(Position position) {
-        positionStorage.putPosition(position);
+    public Long putPosition(Position position) {
+       return positionStorage.putPosition(position);
     }
 
     @Override

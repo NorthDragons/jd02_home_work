@@ -6,7 +6,7 @@ import by.it_academy.model.Department;
 import java.util.Collection;
 
 public interface IDepartmentService {
-    void putDepartment(Department department, Long parentId);
+    Long putDepartment(Department name, Long parentId);
 
     Collection<Department> getAllDepartment();
 

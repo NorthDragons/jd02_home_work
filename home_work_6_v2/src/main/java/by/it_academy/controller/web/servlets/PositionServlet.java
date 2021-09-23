@@ -25,4 +25,13 @@ public class PositionServlet extends HttpServlet {
         req.setAttribute("position", position);
         req.getRequestDispatcher("mail/pos.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        Position position = Position.getInstance();
+        position.setName(name);
+        Long posId = positionService.putPosition(position);
+        resp.sendRedirect(req.getContextPath() + "/position?id=" + posId);
+    }
 }
