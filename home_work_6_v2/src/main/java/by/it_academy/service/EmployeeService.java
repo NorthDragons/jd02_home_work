@@ -1,13 +1,16 @@
 package by.it_academy.service;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Department;
-import by.it_academy.model.Employee;
-import by.it_academy.model.Position;
+import by.it_academy.model.hibernate.EmployeeQuery;
+import by.it_academy.model.sql.Department;
+import by.it_academy.model.sql.Employee;
+import by.it_academy.model.sql.Position;
 import by.it_academy.service.api.IEmployerService;
-import by.it_academy.storage.EmployeeStorage;
+import by.it_academy.storage.hibernate.EmployeeFindBySalary;
+import by.it_academy.storage.sql.EmployeeStorage;
 
 import java.util.Collection;
+import java.util.List;
 
 public class EmployeeService implements IEmployerService {
     private final static EmployeeService instance = new EmployeeService();
@@ -76,6 +79,11 @@ public class EmployeeService implements IEmployerService {
 
     public static EmployeeService getInstance() {
         return instance;
+    }
+
+    public List<EmployeeQuery> findEmployee(String name, Double salary, String mode){
+        EmployeeFindBySalary finder=new EmployeeFindBySalary();
+        return finder.findEmployee(name, salary, mode);
     }
 
 }

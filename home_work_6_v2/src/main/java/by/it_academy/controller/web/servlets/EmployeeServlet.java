@@ -1,9 +1,9 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Department;
-import by.it_academy.model.Employee;
-import by.it_academy.model.Position;
+import by.it_academy.model.sql.Department;
+import by.it_academy.model.sql.Employee;
+import by.it_academy.model.sql.Position;
 import by.it_academy.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +25,11 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        Long id = Long.parseLong(req.getParameter("id"));
+
+
+
+
+
         Employee employee = employeeService.getEmp(Long.parseLong(req.getParameter("id")));
         String posName = employeeService.getPosName(employee.getPosition());
         String depName = employeeService.getDepName(employee.getDepartment());
@@ -38,9 +42,9 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee employee = Employee.getInstance();
-        Department department = Department.getInstance();
-        Position position = Position.getInstance();
+        Employee employee = new Employee();
+        Department department = new Department();
+        Position position = new Position();
 
         String name = req.getParameter("name");
         Double salary = Double.parseDouble(req.getParameter("salary"));

@@ -18,7 +18,7 @@
      <tr> <td>
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
-                    <caption><h2>Отдел</h2></caption>
+                    <tr><h2 align="center">Отдел</h2></tr>
 
                                        <tr>
                                            <td>${department.id}</td><br>

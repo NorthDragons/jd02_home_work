@@ -1,7 +1,7 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Position;
+import by.it_academy.model.sql.Position;
 import by.it_academy.service.PositionService;
 
 import javax.servlet.ServletException;
@@ -29,7 +29,7 @@ public class PositionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        Position position = Position.getInstance();
+        Position position = new Position();
         position.setName(name);
         Long posId = positionService.putPosition(position);
         resp.sendRedirect(req.getContextPath() + "/position?id=" + posId);

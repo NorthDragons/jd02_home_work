@@ -1,9 +1,9 @@
 package by.it_academy.service;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Department;
+import by.it_academy.model.sql.Department;
 import by.it_academy.service.api.IDepartmentService;
-import by.it_academy.storage.DepartmentStorage;
+import by.it_academy.storage.sql.DepartmentStorage;
 
 import java.util.Collection;
 

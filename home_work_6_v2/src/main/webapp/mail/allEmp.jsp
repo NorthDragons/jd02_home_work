@@ -28,7 +28,7 @@
                                        <tr>
                                            <td>${employees.id}</td>
                                            <td>${employees.name}</td>
-                                           <td><a href="${pageContext.request.contextPath}/employee?id=${employees.id}" class="btn">
+                                           <td><a href="${pageContext.request.contextPath}/employee2?id=${employees.id}&mode=2" class="btn">
                                            Карточка сотрудника</a>
                                            </td>
                                        </tr>

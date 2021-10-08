@@ -1,9 +1,9 @@
 package by.it_academy.service;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Position;
+import by.it_academy.model.sql.Position;
 import by.it_academy.service.api.IPositionService;
-import by.it_academy.storage.PositionStorage;
+import by.it_academy.storage.sql.PositionStorage;
 
 import java.util.Collection;
 

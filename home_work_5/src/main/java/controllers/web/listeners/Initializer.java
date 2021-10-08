@@ -14,10 +14,8 @@ import java.time.LocalDateTime;
 
 @WebListener
 public class Initializer implements ServletContextListener {
-    AboutService service;
 
     public Initializer() {
-        this.service = AboutService.getInstance();
     }
 
     @Override
@@ -27,7 +25,6 @@ public class Initializer implements ServletContextListener {
 
         ChatStorageInitializer.setStorageType(chatStorage);
         UserStorageInitializer.setStorageType(userStorage);
-        service.setStartTime(LocalDateTime.now());
     }
 
     @Override

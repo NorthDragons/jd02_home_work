@@ -1,7 +1,7 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Department;
+import by.it_academy.model.sql.Department;
 import by.it_academy.service.DepartmentService;
 
 import javax.servlet.ServletException;

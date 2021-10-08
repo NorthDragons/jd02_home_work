@@ -1,14 +1,9 @@
 package by.it_academy;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.storage.CreatDB;
-import by.it_academy.storage.DBInitializer;
+import by.it_academy.storage.sql.CreatDB;
+import by.it_academy.storage.sql.DBInitializer;
 import by.it_academy.storage.api.DBCreator;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Main {
     private static final DBInitializer dbInitializer = DBInitializer.getInstance();

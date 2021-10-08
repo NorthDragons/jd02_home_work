@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "add", urlPatterns = "/addNewEmp")
 public class AddEmpServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("mail/addNewEmp.jsp").forward(req, resp);

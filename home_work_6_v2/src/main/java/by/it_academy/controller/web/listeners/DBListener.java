@@ -1,7 +1,7 @@
 package by.it_academy.controller.web.listeners;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.storage.CreatDB;
+import by.it_academy.storage.sql.CreatDB;
 import by.it_academy.storage.api.DBCreator;
 
 import javax.servlet.ServletContextEvent;

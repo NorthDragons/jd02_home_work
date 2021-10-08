@@ -1,8 +1,7 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Employee;
-import by.it_academy.model.Employee1;
+import by.it_academy.model.sql.EmployeeBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ public class EmployeeServletBody extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee1 employee1 = mapper.readValue(req.getInputStream(), Employee1.class);
+        EmployeeBody employee1 = mapper.readValue(req.getInputStream(), EmployeeBody.class);
 
     }
 }

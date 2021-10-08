@@ -19,8 +19,8 @@
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
         <table bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
-<form action="${pageContext.request.contextPath}/employee" method="POST">
 
+<form action="${pageContext.request.contextPath}/employee" method="POST">
 
  <h2 align="center">Введите данные </h2>
   <tr align="center">

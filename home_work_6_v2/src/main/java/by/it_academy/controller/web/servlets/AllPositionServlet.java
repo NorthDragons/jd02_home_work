@@ -1,7 +1,7 @@
 package by.it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.Position;
+import by.it_academy.model.sql.Position;
 import by.it_academy.service.PositionService;
 
 import javax.servlet.ServletException;

@@ -1,6 +1,6 @@
 package by.it_academy.storage.api;
 
-import by.it_academy.model.Employee;
+import by.it_academy.model.sql.Employee;
 
 import java.util.Collection;
 
