@@ -19,12 +19,10 @@
         <table border="1" bgcolor="" height="100" cellpadding="10" style="width:100%; border-radius:5px;">
                 <form align="center">
                     <caption><h2>Должность</h2></caption>
-
                                        <tr>
                                            <td>${position.id}</td><br>
                                            <td>${position.name}</td><br>
                                        </tr>
-
                 </form>
         </table>
      </td></tr>

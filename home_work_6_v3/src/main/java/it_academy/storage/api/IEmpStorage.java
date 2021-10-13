@@ -7,9 +7,12 @@ import java.util.Collection;
 public interface IEmpStorage {
     Long putEmployer(Employee employer);
 
-    Employee getEmployee(Long id);
+    Collection<Employee> getEmployee(Long id);
 
     Collection<Employee> getAllEmployers(Long limit, Long offset);
 
     Long getMaxPage(Long limit);
+
+    Collection<Employee> getEmpByName(String name);
+
 }

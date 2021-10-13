@@ -5,16 +5,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="utf-8" />
-<title>Employee</title>
-</head>
-<body> <jsp:include page="topMenuDrop.jsp" />
-
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
@@ -56,11 +46,7 @@
 </td></tr>
 
 </form>
-
         </table>
      </td></tr>
 </table>
-
-
-
 </body>

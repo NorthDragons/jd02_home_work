@@ -22,7 +22,12 @@ public class EmployeeService implements IEmpService {
     }
 
     @Override
-    public Employee getEmp(Long id) {
+    public Collection<Employee> getEmp(Long id) {
+        return null;
+    }
+
+    @Override
+    public Collection<Employee> getEmpByName(String id) {
         return null;
     }
 

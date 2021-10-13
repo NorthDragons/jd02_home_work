@@ -14,6 +14,7 @@ public class EmployeeFindBySalary {
 
     public List<EmployeeQuery> findEmployee(String name, Double salary, String mode) {
         Session sessionOne = HibernateUtil.getSessionFactory().openSession();
+
         CriteriaBuilder criteriaBuilder = HibernateUtil.getSessionFactory().createEntityManager().getCriteriaBuilder();
         CriteriaQuery<EmployeeQuery> criteriaQuery = criteriaBuilder.createQuery(EmployeeQuery.class);
 

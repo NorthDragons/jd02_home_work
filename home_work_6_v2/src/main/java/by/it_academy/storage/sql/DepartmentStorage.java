@@ -24,7 +24,11 @@ public class DepartmentStorage implements IDepartmentStorage {
                     "name, parent_dep)\n" +
                     "VALUES(?,?);", Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, department.getName());
-                preparedStatement.setLong(2, parentId);
+                if(parentId!=0L){
+                    preparedStatement.setLong(2, parentId);
+                }else {
+                    preparedStatement.setLong(2,1L);
+                }
                 preparedStatement.executeUpdate();
 
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -34,7 +38,7 @@ public class DepartmentStorage implements IDepartmentStorage {
                 }
             }
         } catch (SQLException e) {
-            throw new IllegalArgumentException("Ошибка добавления отдела в БД",e);
+            throw new IllegalArgumentException("Ошибка добавления отдела в БД", e);
         }
 
     }
@@ -72,7 +76,7 @@ public class DepartmentStorage implements IDepartmentStorage {
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             final Statement statement = connection.createStatement();
             try (ResultSet resultSet = statement.executeQuery("SELECT id, name, parent_dep FROM application.departments WHERE id=" + id)) {
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     department.setId(resultSet.getLong(1));
                     department.setName(resultSet.getString(2));
                     if (resultSet.getLong(1) != resultSet.getLong(3)) {
@@ -101,7 +105,7 @@ public class DepartmentStorage implements IDepartmentStorage {
             try (Connection connection = dbInitializer.getCpds().getConnection()) {
                 final Statement statement = connection.createStatement();
                 try (ResultSet resultSet = statement.executeQuery("SELECT name FROM application.departments WHERE id=" + id)) {
-                   resultSet.next();
+                    resultSet.next();
                     name = resultSet.getString(1);
                 }
             } catch (SQLException e) {

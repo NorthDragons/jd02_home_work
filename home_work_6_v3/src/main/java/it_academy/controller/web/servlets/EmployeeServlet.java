@@ -1,7 +1,6 @@
 package it_academy.controller.web.servlets;/* created by Kaminskii Ivan
  */
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import it_academy.model.Department;
 import it_academy.model.Employee;
 import it_academy.model.Position;
@@ -14,11 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 @WebServlet(name = "emp", urlPatterns = "/employee")
 public class EmployeeServlet extends HttpServlet {
     private static IEmpService employeeService;
-    private ObjectMapper mapper = new ObjectMapper();
+//    private ObjectMapper mapper = new ObjectMapper(); // для работы с json
 
     public EmployeeServlet() {
         employeeService = EmpServiceInitializer.getInstance();
@@ -26,15 +28,29 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Collection<Employee> employees = new ArrayList<>();
+        Long limit = 15L;
+        Long page = Long.parseLong(req.getParameter("page"));
+        Long offset = employeeService.getOffset(page, limit);
+        HashMap<Long, Collection<Employee>> paginSearch = new HashMap<>();
 
 
-        Employee employee = employeeService.getEmp(Long.parseLong(req.getParameter("id")));
-        String posName = employeeService.getPosName(employee.getPosition());
-        String depName = employeeService.getDepName(employee.getDepartment());
+        if (null != req.getParameter("id")) {
+            employees = employeeService.getEmp(Long.parseLong(req.getParameter("id")));
+            for (Employee employee : employees) {
+                String posName = employeeService.getPosName(employee.getPosition());
+                String depName = employeeService.getDepName(employee.getDepartment());
+                req.setAttribute("position", posName);
+                req.setAttribute("department", depName);
+            }
+        }
 
-        req.setAttribute("employee", employee);
-        req.setAttribute("position", posName);
-        req.setAttribute("department", depName);
+        if (null != req.getParameter("name")) {
+            employees = employeeService.getEmpByName(req.getParameter("name"));
+
+        }
+
+        req.setAttribute("employees", employees);
         req.getRequestDispatcher("mail/emp.jsp").forward(req, resp);
     }
 

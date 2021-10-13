@@ -8,17 +8,19 @@ import it_academy.service.api.IEmpService;
 import it_academy.service.sql.Offset;
 import it_academy.storage.api.IEmpStorage;
 import it_academy.storage.hibernate.EmployeeStorageH;
-import org.hibernate.SessionFactory;
 
 import java.util.Collection;
 
 public class EmployeeServiceH implements IEmpService {
+    private static final EmployeeServiceH instance = new EmployeeServiceH();
     private final IEmpStorage employeeStorageH;
 
+    public EmployeeServiceH() {
+        this.employeeStorageH = EmployeeStorageH.getInstance();
+    }
 
-    public EmployeeServiceH(IEmpStorage employeeStorageH) {
-        this.employeeStorageH = employeeStorageH;
-
+    public static EmployeeServiceH getInstance() {
+        return instance;
     }
 
     @Override
@@ -27,8 +29,13 @@ public class EmployeeServiceH implements IEmpService {
     }
 
     @Override
-    public Employee getEmp(Long id) {
-        return null;
+    public Collection<Employee> getEmp(Long id) {
+        return employeeStorageH.getEmployee(id);
+    }
+
+    @Override
+    public Collection<Employee> getEmpByName(String name) {
+        return employeeStorageH.getEmpByName(name);
     }
 
     @Override

@@ -4,8 +4,8 @@ package by.it_academy.storage.sql;/* created by Kaminskii Ivan
 import by.it_academy.model.sql.Department;
 import by.it_academy.model.sql.Employee;
 import by.it_academy.model.sql.Position;
-import by.it_academy.service.EmployeeMapper;
-import by.it_academy.service.EmployeeService;
+import by.it_academy.service.sql.EmployeeMapper;
+import by.it_academy.service.sql.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;

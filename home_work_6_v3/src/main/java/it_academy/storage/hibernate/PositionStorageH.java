@@ -8,10 +8,15 @@ import org.hibernate.SessionFactory;
 import java.util.Collection;
 
 public class PositionStorageH implements IPosStorage {
+    private static final PositionStorageH instance = new PositionStorageH();
     private final SessionFactory sessionFactory;
 
-    public PositionStorageH(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public PositionStorageH() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
+    public static PositionStorageH getInstance() {
+        return instance;
     }
 
     @Override

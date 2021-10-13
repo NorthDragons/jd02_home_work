@@ -20,9 +20,12 @@ public interface IEmpService {
 
     Collection<Employee> getAllEmp(Long limit, Long offset);
 
-    Employee getEmp(Long id);
+    Collection<Employee> getEmp(Long id);
+
+    Collection<Employee> getEmpByName(String name);
 
     Long getOffset(Long page, Long limit);
 
     Long getMaxPage(Long limit);
+
 }

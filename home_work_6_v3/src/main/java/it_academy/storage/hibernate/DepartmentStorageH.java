@@ -8,10 +8,15 @@ import org.hibernate.SessionFactory;
 import java.util.Collection;
 
 public class DepartmentStorageH implements IDepStorage {
+    private static final DepartmentStorageH instance = new DepartmentStorageH();
     private final SessionFactory sessionFactory;
 
-    public DepartmentStorageH(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public DepartmentStorageH() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
+    public static DepartmentStorageH getInstance() {
+        return instance;
     }
 
     @Override

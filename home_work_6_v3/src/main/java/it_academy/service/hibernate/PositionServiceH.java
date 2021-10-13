@@ -3,21 +3,25 @@ package it_academy.service.hibernate;/* created by Kaminskii Ivan
 
 import it_academy.model.Position;
 import it_academy.service.api.IPosService;
-import it_academy.storage.api.IEmpStorage;
 import it_academy.storage.api.IPosStorage;
 import it_academy.storage.hibernate.PositionStorageH;
-import org.hibernate.SessionFactory;
 
 import java.util.Collection;
 
 public class PositionServiceH implements IPosService {
+    private static final PositionServiceH instance = new PositionServiceH();
     private final IPosStorage positionStorageH;
 
-
-    public PositionServiceH(IPosStorage positionStorageH) {
-        this.positionStorageH = positionStorageH;
+    public PositionServiceH() {
+        this.positionStorageH = PositionStorageH.getInstance();
 
     }
+
+
+    public static PositionServiceH getInstance() {
+        return instance;
+    }
+
 
     @Override
     public Long putPosition(Position position) {

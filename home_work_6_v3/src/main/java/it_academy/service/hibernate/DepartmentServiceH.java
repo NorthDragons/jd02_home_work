@@ -8,12 +8,16 @@ import it_academy.storage.api.IDepStorage;
 import java.util.Collection;
 
 public class DepartmentServiceH implements IDepService {
+    private static final DepartmentServiceH instance= new DepartmentServiceH();
     private final IDepStorage departmentStorageH;
 
-    public DepartmentServiceH(IDepStorage departmentStorage) {
-        this.departmentStorageH = departmentStorage;
+    public DepartmentServiceH() {
+        this.departmentStorageH = null;
     }
 
+    public static DepartmentServiceH getInstance() {
+        return instance;
+    }
 
     @Override
     public Long putDepartment(Department name, Long parentId) {

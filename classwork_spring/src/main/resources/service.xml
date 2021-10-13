@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="PersonService" class="by.it_academy.spring.PersonService"/>
+    <bean id="PersonService" class="by.it_academy.second.PersonService"/>
     <bean id="PersonService2" class="by.it_academy.spring.PersonService2"/>
 
 

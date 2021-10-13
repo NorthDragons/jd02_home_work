@@ -24,7 +24,7 @@ public class EmpServiceInitializer {
             case SQL:
                 return EmployeeService.getInstance();
             case HIBERNATE:
-                return null;
+                return EmployeeServiceH.getInstance();
             default:
                 throw new IllegalArgumentException("Тип хранения введён не правильно");
         }
