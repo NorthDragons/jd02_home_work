@@ -13,4 +13,11 @@ public class Position implements Serializable {
     private String name;
     private Long id;
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

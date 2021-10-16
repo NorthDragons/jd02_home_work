@@ -5,18 +5,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="utf-8" />
-<title>Departments</title>
-<style>
-      <%@include file="/css/buttonStyle.css" %>
-   }
-  </style>
-</head>
-<body> <jsp:include page="topMenuDrop.jsp" />
-
 <body>
 <table background="img/1.jpg" border="1" align="center" rules="rows" style="width:60%;">
      <tr> <td>
@@ -28,7 +16,7 @@
                                        <tr>
                                            <td>${dep.id}</td>
                                            <td>${dep.name}</td>
-                                           <td><a href="${pageContext.request.contextPath}/department?id=${dep.id}" class="btn">
+                                           <td><a href="${pageContext.request.contextPath}/departmentActual?id=${dep.id}" class="btn">
                                            Карточка Должности</a>
                                            </td>
                                        </tr>
@@ -37,9 +25,4 @@
         </table>
      </td></tr>
 </table>
-
 </body>
-
-<body> <jsp:include page="pagin/paginate.jsp" />
-
-</html>

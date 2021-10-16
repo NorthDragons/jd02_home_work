@@ -5,7 +5,6 @@ import by.it_academy.model.sql.Department;
 import by.it_academy.model.sql.Employee;
 import by.it_academy.model.sql.Position;
 import by.it_academy.service.sql.EmployeeMapper;
-import by.it_academy.service.sql.EmployeeService;
 import by.it_academy.storage.api.IEmployerStorage;
 
 import java.sql.*;
@@ -15,16 +14,14 @@ import java.util.List;
 public class EmployeeStorage implements IEmployerStorage {
     private static final EmployeeStorage instance = new EmployeeStorage();
     private final DBInitializer dbInitializer;
-    private final EmployeeService employeeService;
 
     public EmployeeStorage() {
-        employeeService = EmployeeService.getInstance();
         dbInitializer = DBInitializer.getInstance();
     }
 
     public Long putEmployer(Employee employer) {
-        Department department= employer.getDepartment();
-        Position position= employer.getPosition();
+        Department department = employer.getDepartment();
+        Position position = employer.getPosition();
 
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
             try (PreparedStatement preparedStatement =
@@ -43,6 +40,31 @@ public class EmployeeStorage implements IEmployerStorage {
                     employer.setId(generatedKeys.getLong(1));
                     return generatedKeys.getLong(1);
                 }
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("Ошибка сохранения работника", e);
+        }
+
+    }
+
+    @Override
+    public Long updateEmployer(Employee employer) {
+        Department department = employer.getDepartment();
+        Position position = employer.getPosition();
+
+        try (Connection connection = dbInitializer.getCpds().getConnection()) {
+            try (PreparedStatement preparedStatement =
+                         connection.prepareStatement("UPDATE application.employers\n" +
+                                 "\tSET name=?, salary=?, \"position\"=?, department=?\n" +
+                                 "\tWHERE id=?")
+            ) {
+                preparedStatement.setString(1, employer.getName());
+                preparedStatement.setDouble(2, employer.getSalary());
+                preparedStatement.setLong(3, position.getId());
+                preparedStatement.setLong(4, department.getId());
+                preparedStatement.setLong(5, employer.getId());
+                preparedStatement.executeUpdate();
+                return employer.getId();
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException("Ошибка сохранения работника", e);

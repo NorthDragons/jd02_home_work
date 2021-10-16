@@ -7,6 +7,8 @@ import java.util.Collection;
 public interface IEmployerStorage {
     Long putEmployer(Employee employer);
 
+    Long updateEmployer(Employee employer);
+
     Employee getEmployee(Long id);
 
     Collection<Employee> getAllEmployers(Long limit, Long offset);

@@ -5,7 +5,6 @@ import by.it_academy.model.sql.Department;
 import by.it_academy.model.sql.Employee;
 import by.it_academy.model.sql.Position;
 import by.it_academy.service.sql.EmployeeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import java.util.Collection;
 @WebServlet(name = "emp", urlPatterns = "/employeeActual")
 public class EmployeeServletActual extends HttpServlet {
     private static EmployeeService employeeService;
-    private ObjectMapper mapper = new ObjectMapper();
+//    private ObjectMapper mapper = new ObjectMapper();
 
     public EmployeeServletActual() {
         employeeService = EmployeeService.getInstance();
@@ -26,32 +25,33 @@ public class EmployeeServletActual extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        boolean getter = false;
-        getter = Boolean.parseBoolean(req.getParameter("get"));
-        if (getter) {
-            Long id = Long.valueOf(req.getParameter("id"));
-            Employee employee = employeeService.getEmp(id);
-            String posName = employeeService.getPosName(employee.getPosition());
-            String depName = employeeService.getDepName(employee.getDepartment());
+        req.setAttribute("employee_mode", true);
 
-            req.setAttribute("employee", employee);
-            req.setAttribute("position", posName);
-            req.setAttribute("department", depName);
-            req.getRequestDispatcher("mail/emp.jsp").forward(req, resp);
-        } else {
+        boolean all_emp;
+        all_emp = Boolean.parseBoolean(req.getParameter("all"));
+        if (all_emp) {
             Long page = Long.parseLong(req.getParameter("page"));
-
             Long limit = 15L;
             Long offset = employeeService.getOffset(page, limit);
             Long maxPage = employeeService.getMaxPage(limit);
-
             Collection<Employee> employees = employeeService.getAllEmp(limit, offset);
+            req.setAttribute("title", "All_employee");
             req.setAttribute("allEmployers", employees);
             req.setAttribute("active", 4);
             req.setAttribute("page", page);
             req.setAttribute("maxPage", maxPage);
+            req.getRequestDispatcher("mail/allEntity.jsp").forward(req, resp);
+        } else {
+            Long id = Long.valueOf(req.getParameter("id"));
+            Employee employee = employeeService.getEmp(id);
+            String posName = employeeService.getPosName(employee.getPosition());
+            String depName = employeeService.getDepName(employee.getDepartment());
+            req.setAttribute("title", "employee");
+            req.setAttribute("employee", employee);
+            req.setAttribute("position", posName);
+            req.setAttribute("department", depName);
+            req.getRequestDispatcher("mail/entityСard.jsp").forward(req, resp);
 
-            req.getRequestDispatcher("mail/allEmp.jsp").forward(req, resp);
         }
 
     }
@@ -73,6 +73,6 @@ public class EmployeeServletActual extends HttpServlet {
         employee.setDepartment(department);
         employee.setPosition(position);
         final Long empId = employeeService.putEmployer(employee);
-        resp.sendRedirect(req.getContextPath() + "/employee?id=" + empId);
+        resp.sendRedirect(req.getContextPath() + "/employeeActual?id=" + empId);
     }
 }

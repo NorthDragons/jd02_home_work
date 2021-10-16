@@ -24,10 +24,10 @@ public class DepartmentStorage implements IDepartmentStorage {
                     "name, parent_dep)\n" +
                     "VALUES(?,?);", Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, department.getName());
-                if(parentId!=0L){
+                if (parentId != 0L) {
                     preparedStatement.setLong(2, parentId);
-                }else {
-                    preparedStatement.setLong(2,1L);
+                } else {
+                    preparedStatement.setLong(2, 1L);
                 }
                 preparedStatement.executeUpdate();
 
@@ -44,11 +44,22 @@ public class DepartmentStorage implements IDepartmentStorage {
     }
 
     @Override
-    public Collection<Department> getAllDepartment() {
+    public Long updateDepartment(Department name) {
+        return null;
+    }
+
+    @Override
+    public Collection<Department> getAllDepartment(Long limit, Long offset) {
         List<Department> departments = new LinkedList<>();
-        try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.departments")) {
+        try (Connection connection = dbInitializer.getCpds().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT *\n" +
+                "FROM application.departments\n" +
+                "ORDER BY id ASC\n" +
+                "LIMIT ? OFFSET ?")) {
+            preparedStatement.setLong(1, limit);
+            preparedStatement.setLong(2, offset);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Department department = new Department();
                     department.setId(resultSet.getLong(1));
@@ -64,7 +75,7 @@ public class DepartmentStorage implements IDepartmentStorage {
                 }
             }
         } catch (SQLException e) {
-            throw new IllegalStateException("Ошибка работы с Базой Данных -POS", e);
+            throw new IllegalStateException("Ошибка работы с Базой Данных -DEP", e);
         }
         return departments;
 

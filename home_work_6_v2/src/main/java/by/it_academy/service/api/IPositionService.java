@@ -7,9 +7,11 @@ import java.util.Collection;
 public interface IPositionService {
     Long putPosition(Position position);
 
+    Long updatePosition(Position position);
+
     Position getPosition(Long id);
 
-    Collection<Position> getAllPosition();
+    Collection<Position> getAllPosition(Long limit, Long offset);
 
     String getPosName(Position position);
 

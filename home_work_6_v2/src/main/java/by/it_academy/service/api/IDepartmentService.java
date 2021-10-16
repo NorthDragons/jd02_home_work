@@ -6,9 +6,11 @@ import by.it_academy.model.sql.Department;
 import java.util.Collection;
 
 public interface IDepartmentService {
-    Long putDepartment(Department name, Long parentId);
+    Long putDepartment(Department department, Long parentId);
 
-    Collection<Department> getAllDepartment();
+    Long updateDepartment(Department department);
+
+    Collection<Department> getAllDepartment(Long limit, Long offset);
 
     Department getDepartment(Long id);
 

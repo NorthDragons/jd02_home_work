@@ -41,6 +41,11 @@ public class PositionStorage implements IPositionStorage {
     }
 
     @Override
+    public Long updatePosition(Position position) {
+        return null;
+    }
+
+    @Override
     public Position getPosition(Long id) {
         Position position = new Position();
         try (Connection connection = dbInitializer.getCpds().getConnection()) {
@@ -60,11 +65,16 @@ public class PositionStorage implements IPositionStorage {
     }
 
     @Override
-    public Collection<Position> getAllPosition() {
+    public Collection<Position> getAllPosition(Long limit, Long offset) {
         List<Position> positions = new LinkedList<>();
-        try (Connection connection = dbInitializer.getCpds().getConnection()) {
-            Statement statement = connection.createStatement();
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM application.positions")) {
+        try (Connection connection = dbInitializer.getCpds().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * \n" +
+                     "FROM application.positions\n" +
+                     "ORDER BY id ASC\n" +
+                     "LIMIT ? OFFSET ?")) {
+            preparedStatement.setLong(1, limit);
+            preparedStatement.setLong(2, offset);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Position position = new Position();
                     position.setId(resultSet.getLong(1));

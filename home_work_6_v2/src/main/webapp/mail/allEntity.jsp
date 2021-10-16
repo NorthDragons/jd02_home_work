@@ -9,7 +9,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
-<title>Positions</title>
+<title>"${title}"</title>
 <style>
          <%@include file="/css/buttonStyle.css" %>
    }
@@ -19,17 +19,18 @@
 
 <body>
     <c:choose>
-        <c:when test="${department}">
-        <jsp:include page="../allDep.jsp" />
+        <c:when test="${department_mode}">
+        <jsp:include page="resources/allDep.jsp" />
         </c:when>
 
-        <c:when test="${employee}">
-        <jsp:include page="../allEmp.jsp" />
+        <c:when test="${employee_mode}">
+        <jsp:include page="resources/allEmp.jsp" />
         </c:when>
 
-        <c:when test="${position}">
-        <jsp:include page="../allPos.jsp" />
+        <c:when test="${position_mode}">
+        <jsp:include page="resources/allPos.jsp" />
         </c:when>
+    </c:choose>
 
 
 

@@ -10,16 +10,10 @@ import java.util.Collection;
 public class DepartmentService implements IDepartmentService {
     private static final DepartmentService instance = new DepartmentService();
     private final DepartmentStorage departmentStorage;
-    private final HDepartmentHepler hDepartmentHepler;
 
-    private final EmployeeService employeeService;
-    private final PositionService positionService;
 
     public DepartmentService() {
-        hDepartmentHepler = HDepartmentHepler.getInstance();
         departmentStorage = DepartmentStorage.getInstance();
-        employeeService = EmployeeService.getInstance();
-        positionService = PositionService.getInstance();
     }
 
     public static DepartmentService getInstance() {
@@ -32,8 +26,13 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public Collection<Department> getAllDepartment() {
-        return departmentStorage.getAllDepartment();
+    public Long updateDepartment(Department department) {
+        return departmentStorage.updateDepartment(department);
+    }
+
+    @Override
+    public Collection<Department> getAllDepartment(Long limit, Long offset) {
+        return departmentStorage.getAllDepartment(limit, offset);
     }
 
     @Override

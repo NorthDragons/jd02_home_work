@@ -12,11 +12,7 @@ import java.util.List;
 
 public class EmployeeMapper {
     private static final EmployeeMapper instance = new EmployeeMapper();
-    private final EmployeeService service;
 
-    public EmployeeMapper() {
-        service = EmployeeService.getInstance();
-    }
 
     public Employee onceGetMapping(ResultSet resultSet) {
         Employee employee = new Employee();

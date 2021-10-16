@@ -11,6 +11,8 @@ public interface IEmployerService {
 
     Long putEmployer(Employee employer);
 
+    Long updateEmployer(Employee employer);
+
     String getPosName(Position position);
 
     Long getPosId(Position position);

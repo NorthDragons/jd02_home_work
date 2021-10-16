@@ -26,7 +26,7 @@
 	    <li>
 	        <a href="#">Отделы</a>
                 <ul>
-	                <li><a href="${pageContext.request.contextPath}/allDep?page=1">Все отделы</a></li>
+	                <li><a href="${pageContext.request.contextPath}/departmentActual?page=1&all=true">Все отделы</a></li>
 	                <li><a href="#">Карточка отдела</a></li>
 	                <li><a href="${pageContext.request.contextPath}/addNewActualDep">Добавить отдел</a></li>
 	                <li><a href="#">Редактировать отдел</a></li>
@@ -35,7 +35,7 @@
 	    <li>
 	        <a href="#">Должности</a>
               	<ul>
-	                <li><a href="${pageContext.request.contextPath}/allPos?page=1">Все должности</a></li>
+	                <li><a href="${pageContext.request.contextPath}/positionActual?page=1&all=true">Все должности</a></li>
 	                <li><a href="#">Карточка должности</a></li>
 	                <li><a href="${pageContext.request.contextPath}/addNewActualPos">Добавить должность</a></li>
 	                <li><a href="#">Редактировать должность</a></li>
@@ -44,8 +44,8 @@
 		<li>
 		    <a href="#">Сотрудники</a>
                 <ul>
-			         <li><a href="${pageContext.request.contextPath}/employeeActual?page=1">Все сотрудники</a></li>
-			         <li><a href="${pageContext.request.contextPath}/employeeActual?get=true&id=200">Карточка сотрудника</a></li>
+			         <li><a href="${pageContext.request.contextPath}/employeeActual?page=1&all=true">Все сотрудники</a></li>
+			         <li><a href="${pageContext.request.contextPath}/employeeActual?id=200">Карточка сотрудника</a></li>
 			         <li><a href="${pageContext.request.contextPath}/addNewActualEmp">Добавить сотрудника</a></li>
 		             <li><a href="#">Сгенерировать сотрудников</a></li>
 			         <li><a href="#">Редактировать сотрудника</a></li>

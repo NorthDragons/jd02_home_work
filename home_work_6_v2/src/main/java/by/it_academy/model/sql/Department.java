@@ -14,4 +14,13 @@ public class Department implements Serializable {
     private String name;
 
     private Department parentDep;
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentDep=" + parentDep +
+                '}';
+    }
 }

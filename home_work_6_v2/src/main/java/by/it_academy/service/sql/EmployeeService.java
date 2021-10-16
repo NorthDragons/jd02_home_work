@@ -5,6 +5,7 @@ import by.it_academy.model.hibernate.EmployeeQuery;
 import by.it_academy.model.sql.Department;
 import by.it_academy.model.sql.Employee;
 import by.it_academy.model.sql.Position;
+import by.it_academy.service.api.IDepartmentService;
 import by.it_academy.service.api.IEmployerService;
 import by.it_academy.storage.hibernate.EmployeeFindBySalary;
 import by.it_academy.storage.sql.EmployeeStorage;
@@ -16,22 +17,27 @@ public class EmployeeService implements IEmployerService {
     private final static EmployeeService instance = new EmployeeService();
 
 
-    private final EmployeeStorage storage;
+    private final EmployeeStorage employeeStorage;
 
 
-    private final DepartmentService departmentService;
+    private final IDepartmentService departmentService;
     private final PositionService positionService;
 
     public EmployeeService() {
         departmentService = DepartmentService.getInstance();
-        storage = EmployeeStorage.getInstance();
+        employeeStorage = EmployeeStorage.getInstance();
         positionService = PositionService.getInstance();
     }
 
 
     @Override
     public Long putEmployer(Employee employer) {
-        return storage.putEmployer(employer);
+        return employeeStorage.putEmployer(employer);
+    }
+
+    @Override
+    public Long updateEmployer(Employee employer) {
+        return employeeStorage.updateEmployer(employer);
     }
 
     @Override
@@ -56,12 +62,12 @@ public class EmployeeService implements IEmployerService {
 
     @Override
     public Collection<Employee> getAllEmp(Long limit, Long offset) {
-        return storage.getAllEmployers(limit, offset);
+        return employeeStorage.getAllEmployers(limit, offset);
     }
 
     @Override
     public Employee getEmp(Long id) {
-        return storage.getEmployee(id);
+        return employeeStorage.getEmployee(id);
     }
 
     @Override
@@ -74,16 +80,16 @@ public class EmployeeService implements IEmployerService {
 
     @Override
     public Long getMaxPage(Long limit) {
-        return storage.getMaxPage(limit);
-    }
-
-    public static EmployeeService getInstance() {
-        return instance;
+        return employeeStorage.getMaxPage(limit);
     }
 
     public List<EmployeeQuery> findEmployee(String name, Double salary, String mode){
         EmployeeFindBySalary finder=new EmployeeFindBySalary();
         return finder.findEmployee(name, salary, mode);
+    }
+
+    public static EmployeeService getInstance() {
+        return instance;
     }
 
 }

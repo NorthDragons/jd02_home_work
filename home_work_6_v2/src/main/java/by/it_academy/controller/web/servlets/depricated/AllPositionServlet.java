@@ -28,7 +28,7 @@ public class AllPositionServlet extends HttpServlet {
         Long offset = positionService.getOffset(page, limit);
         Long maxPage = positionService.getMaxPage(limit);
 
-        Collection<Position> positions = positionService.getAllPosition();
+        Collection<Position> positions = positionService.getAllPosition(limit, offset);
         req.setAttribute("positions", positions);
         req.setAttribute("active", 3);
         req.setAttribute("page",page);

@@ -25,13 +25,18 @@ public class PositionService implements IPositionService {
     }
 
     @Override
+    public Long updatePosition(Position position) {
+        return positionStorage.updatePosition(position);
+    }
+
+    @Override
     public Position getPosition(Long id) {
         return positionStorage.getPosition(id);
     }
 
     @Override
-    public Collection<Position> getAllPosition() {
-        return positionStorage.getAllPosition();
+    public Collection<Position> getAllPosition(Long limit, Long offset) {
+        return positionStorage.getAllPosition( limit,  offset);
     }
 
     @Override

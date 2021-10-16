@@ -13,18 +13,18 @@
 <meta charset="utf-8" />
 <title>Employee</title>
 </head>
-<body> <jsp:include page="../topMenuDrop.jsp" />
+<body> <jsp:include page="topMenuDrop.jsp" />
     <c:choose>
         <c:when test="${department}">
-            <jsp:include page="../addNewDep.jsp"/>
+            <jsp:include page="resources/addNewDep.jsp"/>
         </c:when>
 
         <c:when test="${employee}">
-            <jsp:include page="../addNewEmp.jsp"/>
+            <jsp:include page="resources/addNewEmp.jsp"/>
         </c:when>
 
         <c:when test="${position}">
-            <jsp:include page="../addNewPos.jsp"/>
+            <jsp:include page="resources/addNewPos.jsp"/>
         </c:when>
 
     </c:choose>
