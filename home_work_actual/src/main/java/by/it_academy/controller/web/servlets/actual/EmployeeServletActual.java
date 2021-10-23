@@ -1,10 +1,11 @@
 package by.it_academy.controller.web.servlets.actual;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Department;
-import by.it_academy.model.sql.Employee;
-import by.it_academy.model.sql.Position;
-import by.it_academy.service.sql.EmployeeService;
+import by.it_academy.model.Department;
+import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
+import by.it_academy.service.EmpServiceInitializer;
+import by.it_academy.service.api.IEmployerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,11 @@ import java.util.Collection;
 
 @WebServlet(name = "emp", urlPatterns = "/employeeActual")
 public class EmployeeServletActual extends HttpServlet {
-    private static EmployeeService employeeService;
+    private static IEmployerService employeeService;
 //    private ObjectMapper mapper = new ObjectMapper();
 
     public EmployeeServletActual() {
-        employeeService = EmployeeService.getInstance();
+        employeeService = EmpServiceInitializer.getInstance();
     }
 
     @Override
@@ -34,7 +35,6 @@ public class EmployeeServletActual extends HttpServlet {
                     req.setAttribute("title", "Получить карточку пользователя");
                     req.getRequestDispatcher("mail/resources/getEntityBody.jsp").forward(req, resp);
                 } else {
-//                    Long id = Long.valueOf(req.getParameter("id"));
                     Employee employee = employeeService.getEmp(Long.valueOf(id));
                     if (employee.getDepartment() != null) {
                         Department department = employee.getDepartment();

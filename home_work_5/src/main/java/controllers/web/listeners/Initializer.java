@@ -1,8 +1,6 @@
 package controllers.web.listeners;/* created by Kaminskii Ivan
  */
 
-import service.AboutService;
-import service.MailMessageService;
 import storage.ChatStorageInitializer;
 import storage.EStorageType;
 import storage.UserStorageInitializer;
@@ -10,7 +8,6 @@ import storage.UserStorageInitializer;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.time.LocalDateTime;
 
 @WebListener
 public class Initializer implements ServletContextListener {

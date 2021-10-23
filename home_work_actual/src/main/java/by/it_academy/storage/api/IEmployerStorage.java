@@ -1,13 +1,13 @@
 package by.it_academy.storage.api;
 
-import by.it_academy.model.sql.Employee;
+import by.it_academy.model.Employee;
 
 import java.util.Collection;
 
 public interface IEmployerStorage {
-    Long putEmployer(Employee employer);
+    Long putEmployer(Employee employee);
 
-    Long updateEmployer(Employee employer);
+    Long updateEmployer(Employee employee);
 
     Employee getEmployee(Long id);
 

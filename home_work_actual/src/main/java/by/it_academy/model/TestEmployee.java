@@ -1,21 +1,18 @@
-package by.it_academy.model.hibernate;/* created by Kaminskii Ivan
+package by.it_academy.model;/* created by Kaminskii Ivan
  */
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Entity
-@Table(name = "employers")
-public class EmployeeQuery implements Serializable {
-
+@Table(name = "employees")
+public class TestEmployee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "salary")
     private Double salary;
 
@@ -47,8 +44,6 @@ public class EmployeeQuery implements Serializable {
         this.salary = salary;
     }
 
-    public EmployeeQuery() {
-    }
 
     @Override
     public String toString() {

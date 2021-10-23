@@ -17,7 +17,9 @@
 
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <mapping class="by.it_academy.model.hibernate.EmployeeQuery"/>
+    <mapping class="by.it_academy.model.Employee"/>
+    <mapping class="by.it_academy.model.Department"/>
+    <mapping class="by.it_academy.model.Position"/>
 
 </session-factory>
 </hibernate-configuration>

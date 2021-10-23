@@ -1,8 +1,9 @@
 package by.it_academy.controller.web.servlets.actual;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Department;
-import by.it_academy.service.sql.DepartmentService;
+import by.it_academy.model.Department;
+import by.it_academy.service.DepServiceInitializer;
+import by.it_academy.service.api.IDepartmentService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,10 @@ import java.util.Collection;
 
 @WebServlet(name = "dep", urlPatterns = "/departmentActual")
 public class DepartmentServletActual extends HttpServlet {
-    private static DepartmentService departmentService;
+    private static IDepartmentService departmentService;
 
     public DepartmentServletActual() {
-        departmentService = DepartmentService.getInstance();
+        departmentService = DepServiceInitializer.getInstance();
     }
 
     @Override
@@ -27,12 +28,12 @@ public class DepartmentServletActual extends HttpServlet {
         String id = req.getParameter("id");
         switch (get_mode) {
             case ("one"):
-                if(id==null || id.isBlank()){
+                if (id == null || id.isBlank()) {
                     req.setAttribute("title", "Получить карточку отдела");
                     req.getRequestDispatcher("mail/resources/getEntityBody.jsp").forward(req, resp);
-                }else {
+                } else {
                     Department department = departmentService.getDepartment(Long.parseLong(id));
-                    Department parentDep = department.getParentDep();
+                    Department parentDep = department.getParent_dep();
                     req.setAttribute("title", "Отдел");
                     req.setAttribute("department", department);
                     req.setAttribute("parentDep", parentDep);
@@ -68,10 +69,7 @@ public class DepartmentServletActual extends HttpServlet {
         }
     }
 
-    /*
-    put_mode (0) - create mode
-    put_mode (1) - update mode
-     */
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String put_mode = req.getParameter("put_mode");

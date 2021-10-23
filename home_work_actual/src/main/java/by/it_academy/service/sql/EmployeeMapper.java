@@ -1,9 +1,9 @@
 package by.it_academy.service.sql;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Department;
-import by.it_academy.model.sql.Employee;
-import by.it_academy.model.sql.Position;
+import by.it_academy.model.Department;
+import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.storage.sql.DepartmentStorage;
 import by.it_academy.storage.sql.PositionStorage;
 

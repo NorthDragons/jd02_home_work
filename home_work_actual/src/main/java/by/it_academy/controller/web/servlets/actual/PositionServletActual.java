@@ -1,8 +1,9 @@
 package by.it_academy.controller.web.servlets.actual;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Position;
-import by.it_academy.service.sql.PositionService;
+import by.it_academy.model.Position;
+import by.it_academy.service.PosServiceInitializer;
+import by.it_academy.service.api.IPositionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,10 @@ import java.util.Collection;
 
 @WebServlet(name = "pos", urlPatterns = "/positionActual")
 public class PositionServletActual extends HttpServlet {
-    private static PositionService positionService;
+    private static IPositionService positionService;
 
     public PositionServletActual() {
-        positionService = PositionService.getInstance();
+        positionService = PosServiceInitializer.getInstance();
     }
 
     @Override

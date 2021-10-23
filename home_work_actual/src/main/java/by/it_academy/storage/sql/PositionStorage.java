@@ -1,7 +1,7 @@
 package by.it_academy.storage.sql;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Position;
+import by.it_academy.model.Position;
 import by.it_academy.storage.api.IPositionStorage;
 
 import java.sql.*;

@@ -4,10 +4,10 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>my first project</display-name>
+    <display-name>mailerActual</display-name>
 
     <welcome-file-list>
-        <welcome-file>mail/choice.jsp</welcome-file>
+        <welcome-file>mail/hello.jsp</welcome-file>
     </welcome-file-list>
 
 
@@ -16,14 +16,11 @@
         <param-value>UTF-8</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>chat_storage</param-name>
-        <param-value>FILE</param-value>
-    </context-param>
+
 
     <context-param>
-        <param-name>user_storage</param-name>
-        <param-value>FILE</param-value>
+        <param-name>service_mod</param-name>
+        <param-value>HIBERNATE</param-value>
     </context-param>
 
 </web-app>

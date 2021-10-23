@@ -1,17 +1,14 @@
 package by.it_academy.service.sql;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.hibernate.EmployeeQuery;
-import by.it_academy.model.sql.Department;
-import by.it_academy.model.sql.Employee;
-import by.it_academy.model.sql.Position;
+import by.it_academy.model.Department;
+import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.service.api.IDepartmentService;
 import by.it_academy.service.api.IEmployerService;
-import by.it_academy.storage.hibernate.EmployeeFindBySalary;
 import by.it_academy.storage.sql.EmployeeStorage;
 
 import java.util.Collection;
-import java.util.List;
 
 public class EmployeeService implements IEmployerService {
     private final static EmployeeService instance = new EmployeeService();
@@ -72,7 +69,7 @@ public class EmployeeService implements IEmployerService {
 
     @Override
     public Long getOffset(Long page, Long limit) {
-        if(page==0){
+        if (page == 0) {
             return page;
         }
         return (page - 1L) * limit;
@@ -83,10 +80,6 @@ public class EmployeeService implements IEmployerService {
         return employeeStorage.getMaxPage(limit);
     }
 
-    public List<EmployeeQuery> findEmployee(String name, Double salary, String mode){
-        EmployeeFindBySalary finder=new EmployeeFindBySalary();
-        return finder.findEmployee(name, salary, mode);
-    }
 
     public static EmployeeService getInstance() {
         return instance;

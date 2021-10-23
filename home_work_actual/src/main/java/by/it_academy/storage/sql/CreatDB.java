@@ -107,11 +107,11 @@ public class CreatDB implements DBCreator {
     public void empTable() {
         try (Connection connection = dbInitializer.getCpds().getConnection()
         ) {
-            PreparedStatement statement = connection.prepareStatement("-- Table: application.employers\n" +
+            PreparedStatement statement = connection.prepareStatement("-- Table: application.employees\n" +
                     "\n" +
-                    "-- DROP TABLE application.employers;\n" +
+                    "-- DROP TABLE application.employees;\n" +
                     "\n" +
-                    "CREATE TABLE IF NOT EXISTS application.employers\n" +
+                    "CREATE TABLE IF NOT EXISTS application.employees\n" +
                     "(\n" +
                     "    id bigint NOT NULL DEFAULT nextval('application.employers_id_seq'::regclass),\n" +
                     "    name text COLLATE pg_catalog.\"default\",\n" +
@@ -133,22 +133,22 @@ public class CreatDB implements DBCreator {
                     "\n" +
                     "TABLESPACE pg_default;\n" +
                     "\n" +
-                    "ALTER TABLE application.employers\n" +
+                    "ALTER TABLE application.employees\n" +
                     "    OWNER to postgres;\n" +
                     "-- Index: fki_department_fk\n" +
                     "\n" +
                     "-- DROP INDEX application.fki_department_fk;\n" +
                     "\n" +
-                    "CREATE INDEX IF NOT EXISTS fki_department_fk\n" +
-                    "    ON application.employers USING btree\n" +
+                    "CREATE INDEX fki_department_fk\n" +
+                    "    ON application.employees USING btree\n" +
                     "    (department ASC NULLS LAST)\n" +
                     "    TABLESPACE pg_default;\n" +
                     "-- Index: fki_position_fk\n" +
                     "\n" +
                     "-- DROP INDEX application.fki_position_fk;\n" +
                     "\n" +
-                    "CREATE INDEX IF NOT EXISTS fki_position_fk\n" +
-                    "    ON application.employers USING btree\n" +
+                    "CREATE INDEX fki_position_fk\n" +
+                    "    ON application.employees USING btree\n" +
                     "    (\"position\" ASC NULLS LAST)\n" +
                     "    TABLESPACE pg_default;");
 

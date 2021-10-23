@@ -1,7 +1,7 @@
 package by.it_academy.service.api;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Department;
+import by.it_academy.model.Department;
 
 import java.util.Collection;
 

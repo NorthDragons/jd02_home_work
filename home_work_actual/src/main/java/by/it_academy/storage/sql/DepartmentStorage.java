@@ -1,7 +1,7 @@
 package by.it_academy.storage.sql;/* created by Kaminskii Ivan
  */
 
-import by.it_academy.model.sql.Department;
+import by.it_academy.model.Department;
 import by.it_academy.storage.api.IDepartmentStorage;
 
 import java.sql.*;
@@ -65,11 +65,11 @@ public class DepartmentStorage implements IDepartmentStorage {
                     department.setId(resultSet.getLong(1));
                     department.setName(resultSet.getString(2));
                     if (resultSet.getLong(1) != resultSet.getLong(3)) {
-                        department.setParentDep(this.getDepartment(resultSet.getLong(3)));
+                        department.setParent_dep(this.getDepartment(resultSet.getLong(3)));
                     } else {
                         Department parentDep = new Department();
                         parentDep.setName("Не имеет родительского отдела");
-                        department.setParentDep(parentDep);
+                        department.setParent_dep(parentDep);
                     }
                     departments.add(department);
                 }
@@ -91,11 +91,11 @@ public class DepartmentStorage implements IDepartmentStorage {
                     department.setId(resultSet.getLong(1));
                     department.setName(resultSet.getString(2));
                     if (resultSet.getLong(1) != resultSet.getLong(3)) {
-                        department.setParentDep(this.getDepartment(resultSet.getLong(3)));
+                        department.setParent_dep(this.getDepartment(resultSet.getLong(3)));
                     } else {
                         Department parentDep = new Department();
                         parentDep.setName("Не имеет родительского отдела");
-                        department.setParentDep(parentDep);
+                        department.setParent_dep(parentDep);
                     }
                 }
 

@@ -1,9 +1,28 @@
-package by.it_academy.model.sql;/* created by Kaminskii Ivan
+package by.it_academy.model;/* created by Kaminskii Ivan
  */
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "employees")
 public class Employee implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "salary")
+    private Double salary;
+    @OneToOne
+    @JoinColumn(name = "department", referencedColumnName = "id")
+    private Department department;
+    @OneToOne
+    @JoinColumn(name = "position", referencedColumnName = "id")
+    private Position position;
+
+
     public Long getId() {
         return id;
     }
@@ -42,21 +61,8 @@ public class Employee implements Serializable {
 
     public void setPosition(Position position) {
         this.position = position;
+
     }
-
-    private Long id;
-
-
-    private String name;
-
-
-    private Double salary;
-
-
-    private Department department;
-
-
-    private Position position;
 
 
     @Override
