@@ -15,11 +15,7 @@ public interface IEmployerService {
 
     String getPosName(Position position);
 
-    Long getPosId(Position position);
-
     String getDepName(Department department);
-
-    Long getDepId(Department department);
 
     Collection<Employee> getAllEmp(Long limit, Long offset);
 

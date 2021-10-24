@@ -5,6 +5,8 @@ import by.it_academy.service.DepServiceInitializer;
 import by.it_academy.service.EInitializer;
 import by.it_academy.service.EmpServiceInitializer;
 import by.it_academy.service.PosServiceInitializer;
+import by.it_academy.storage.hibernate.HibernateUtil;
+import by.it_academy.storage.sql.DBInitializer;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -28,6 +30,7 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-
+        HibernateUtil.shutdown();
+        DBInitializer.shutdown();
     }
 }

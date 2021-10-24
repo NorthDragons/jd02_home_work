@@ -42,19 +42,11 @@ public class EmployeeService implements IEmployerService {
         return positionService.getPosName(position);
     }
 
-    @Override
-    public Long getPosId(Position position) {
-        return positionService.getPosId(position);
-    }
+
 
     @Override
     public String getDepName(Department department) {
         return departmentService.getDepName(department);
-    }
-
-    @Override
-    public Long getDepId(Department department) {
-        return departmentService.getDepId(department);
     }
 
     @Override

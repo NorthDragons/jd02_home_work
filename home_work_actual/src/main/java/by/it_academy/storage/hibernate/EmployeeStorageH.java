@@ -3,51 +3,56 @@ package by.it_academy.storage.hibernate;/* created by Kaminskii Ivan
 
 import by.it_academy.model.Employee;
 import by.it_academy.storage.api.IEmployerStorage;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class EmployeeStorageH implements IEmployerStorage {
+    private static final EmployeeStorageH instance = new EmployeeStorageH();
+
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Long putEmployer(Employee employee) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
         session.save(employee);
-        session.getTransaction().commit();
-        HibernateUtil.shutdown();
+        transaction.commit();
+        session.close();
         return employee.getId();
     }
 
     @Override
     public Long updateEmployer(Employee employee) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-//        employee=session.
-        return null;
+        try (Session session = sessionFactory.openSession();) {
+            final Transaction transaction = session.beginTransaction();
+            session.update(employee);
+            transaction.commit();
+        } catch (IllegalStateException | HibernateException e) {
+            e.printStackTrace();
+        }
+
+        return Objects.requireNonNull(employee).getId();
     }
 
     @Override
     public Employee getEmployee(Long id) {
-        Session session = sessionFactory.openSession();
-        final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        final CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
-        Root<Employee> root = criteriaQuery.from(Employee.class);
-        criteriaQuery.where(
-                criteriaBuilder.and(
-//                criteriaBuilder("id",id);
-
-                )
-        );
-        return null;
+        Employee employee;
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            employee = session.get(Employee.class, id);
+            transaction.commit();
+        }
+        return employee;
     }
 
     @Override
@@ -74,5 +79,9 @@ public class EmployeeStorageH implements IEmployerStorage {
         cq.select(cb.count(cq.from(Employee.class)));
         float aFloat = ((float) session.createQuery(cq).getSingleResult() / (float) limit);
         return (Long) (long) Math.ceil(aFloat);
+    }
+
+    public static EmployeeStorageH getInstance() {
+        return instance;
     }
 }

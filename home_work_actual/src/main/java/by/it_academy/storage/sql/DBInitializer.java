@@ -29,4 +29,7 @@ public class DBInitializer {
     public static DBInitializer getInstance() {
         return instance;
     }
+    public static void shutdown(){
+        cpds.close();
+    }
 }

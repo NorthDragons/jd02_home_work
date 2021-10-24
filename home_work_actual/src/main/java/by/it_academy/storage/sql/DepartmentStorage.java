@@ -44,7 +44,7 @@ public class DepartmentStorage implements IDepartmentStorage {
     }
 
     @Override
-    public Long updateDepartment(Department name) {
+    public Long updateDepartment(Department name, Long parId) {
         return null;
     }
 
@@ -127,29 +127,6 @@ public class DepartmentStorage implements IDepartmentStorage {
         }
         return name;
     }
-
-    @Override
-    public Long getDepId(Department department) {
-        Long id;
-        if (department.getId() != null) {
-            id = department.getId();
-        } else if (department.getName() != null) {
-            try (Connection connection = dbInitializer.getCpds().getConnection()) {
-                String name = department.getName();
-                Statement statement = connection.createStatement();
-                try (ResultSet resultSet = statement.executeQuery("SELECT id FROM application.positions WHERE name=" + name)) {
-                    resultSet.next();
-                    id = resultSet.getLong(1);
-                }
-            } catch (SQLException e) {
-                throw new IllegalStateException("Ошибка получения ID", e);
-            }
-        } else {
-            throw new IllegalArgumentException("Не задано обязательного условия для получения ID -DEP");
-        }
-        return id;
-    }
-
 
     @Override
     public Long getMaxPage(Long limit) {

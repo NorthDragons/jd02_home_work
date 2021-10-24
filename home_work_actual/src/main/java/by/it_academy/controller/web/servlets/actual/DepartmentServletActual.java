@@ -72,23 +72,38 @@ public class DepartmentServletActual extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long depId;
         String put_mode = req.getParameter("put_mode");
+        String name = req.getParameter("name");
+        String parentId = req.getParameter("parId");
+        long parId = 0L;
+        Department department;
         switch (put_mode) {
             case ("add"):
-                long parId = 0L;
-                Department department = new Department();
-                String name = req.getParameter("name");
-                if (!req.getParameter("parId").equals("")) {
-                    parId = Long.parseLong(req.getParameter("parId"));
+                department = new Department();
+                if (!parentId.isBlank()) {
+                    parId = Long.parseLong(parentId);
                 }
                 department.setName(name);
-                Long depId = departmentService.putDepartment(department, parId);
-                resp.sendRedirect(req.getContextPath() + "/departmentActual?get_mode=one&id=" + depId);
+                depId = departmentService.putDepartment(department, parId);
                 break;
             case ("update"):
+                Long id = Long.valueOf(req.getParameter("id"));
+                department = departmentService.getDepartment(id);
+                if(department==null){
+                    throw new IllegalStateException("Отдел с ID:"+id+" - не найден");
+                }
+                if (!parentId.isBlank()) {
+                    parId = Long.parseLong(parentId);
+                }
+                if(!name.isBlank()){
+                    department.setName(name);
+                }
+                depId = departmentService.updateDepartment(department, parId);
                 break;
             default:
                 throw new IllegalStateException("Не определен put_mode");
         }
+        resp.sendRedirect(req.getContextPath() + "/departmentActual?get_mode=one&id=" + depId);
     }
 }

@@ -7,7 +7,7 @@
 
 <body>
 
-<form action="${pageContext.request.contextPath}/employeeActual?put_mode="${put_mode} method="POST">
+<form action="${pageContext.request.contextPath}/employeeActual" method="POST">
 
   <c:if test="${put_mode eq 'update'}"><tr align="center"><td>
   ID (обязательное поле):<br>
@@ -20,7 +20,9 @@
   <tr align="center"><td>
   Зарплата:<br>
   <input type="text" name="salary">
+  <input type="hidden" name="put_mode" value = ${put_mode}
   </td></tr>
+
 
 <tr align="center">
   <td>

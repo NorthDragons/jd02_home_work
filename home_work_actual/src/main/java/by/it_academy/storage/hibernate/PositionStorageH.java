@@ -7,6 +7,8 @@ import by.it_academy.storage.api.IPositionStorage;
 import java.util.Collection;
 
 public class PositionStorageH implements IPositionStorage {
+    private final static PositionStorageH instance = new PositionStorageH();
+
     @Override
     public Long putPosition(Position position) {
         return null;
@@ -33,12 +35,11 @@ public class PositionStorageH implements IPositionStorage {
     }
 
     @Override
-    public Long getPosId(Position position) {
+    public Long getMaxPage(Long limit) {
         return null;
     }
 
-    @Override
-    public Long getMaxPage(Long limit) {
-        return null;
+    public static PositionStorageH getInstance() {
+        return instance;
     }
 }

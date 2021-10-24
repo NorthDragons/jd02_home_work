@@ -2,7 +2,6 @@ package by.it_academy.storage.hibernate;/* created by Kaminskii Ivan
  */
 
 import by.it_academy.model.Employee;
-import by.it_academy.model.TestEmployee;
 import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;

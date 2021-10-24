@@ -89,29 +89,28 @@ public class EmployeeServletActual extends HttpServlet {
         String salary = req.getParameter("salary");
         String posId = req.getParameter("posId");
         String depId = req.getParameter("depId");
-        Position position;
-        Department department;
-        Employee employee;
         switch (put_mode) {
             case ("add"):
-                employee = new Employee();
-                employee.setName(name);
-                employee.setSalary((!(salary.equals(""))) ? Double.parseDouble(salary) : 0.0);
+                Employee add_employee = new Employee();
+                add_employee.setName(name);
+                add_employee.setSalary((!(salary.equals(""))) ? Double.parseDouble(salary) : 0.0);
                 if (!depId.isBlank()) {
-                    department = new Department();
+                    Department department = new Department();
                     department.setId(Long.valueOf(depId));
-                    employee.setDepartment(department);
+                    add_employee.setDepartment(department);
                 }
                 if (!posId.isBlank()) {
-                    position = new Position();
+                    Position position = new Position();
                     position.setId(Long.valueOf(posId));
-                    employee.setPosition(position);
+                    add_employee.setPosition(position);
                 }
-                empId = employeeService.putEmployer(employee);
+                empId = employeeService.putEmployer(add_employee);
                 break;
             case ("update"):
-                empId = Long.valueOf(req.getParameter("id"));
-                employee = employeeService.getEmp(empId);
+                Employee employee = employeeService.getEmp(Long.valueOf(req.getParameter("id")));
+                if(employee==null){
+                    throw new IllegalStateException("Не найден работник с таким ID");
+                }
                 if (!name.isBlank()) {
                     employee.setName(name);
                 }
@@ -119,20 +118,22 @@ public class EmployeeServletActual extends HttpServlet {
                     employee.setSalary(Double.parseDouble(salary));
                 }
                 if (!posId.isBlank()) {
-                    position = employee.getPosition();
+                    Position position = new Position();
                     position.setId(Long.valueOf(posId));
                     employee.setPosition(position);
                 }
                 if (!depId.isBlank()) {
-                    department = employee.getDepartment();
+                    Department department = new Department();
                     department.setId(Long.valueOf(depId));
                     employee.setDepartment(department);
                 }
                 employeeService.updateEmployer(employee);
+                empId = employee.getId();
                 break;
             default:
                 throw new IllegalStateException("Не определён put_mode");
         }
+
         resp.sendRedirect(req.getContextPath() + "/employeeActual?id=" + empId + "&get_mode=one");
     }
 }

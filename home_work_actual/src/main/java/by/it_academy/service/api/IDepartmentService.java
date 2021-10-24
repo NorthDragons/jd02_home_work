@@ -8,15 +8,13 @@ import java.util.Collection;
 public interface IDepartmentService {
     Long putDepartment(Department department, Long parentId);
 
-    Long updateDepartment(Department department);
+    Long updateDepartment(Department department, Long parId);
 
     Collection<Department> getAllDepartment(Long limit, Long offset);
 
     Department getDepartment(Long id);
 
     String getDepName(Department department);
-
-    Long getDepId(Department department);
 
     Long getOffset(Long page, Long limit);
 

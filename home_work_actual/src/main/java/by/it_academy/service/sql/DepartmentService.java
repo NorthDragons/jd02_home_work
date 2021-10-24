@@ -26,8 +26,8 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public Long updateDepartment(Department department) {
-        return departmentStorage.updateDepartment(department);
+    public Long updateDepartment(Department department, Long parId) {
+        return departmentStorage.updateDepartment(department, parId);
     }
 
     @Override
@@ -43,11 +43,6 @@ public class DepartmentService implements IDepartmentService {
     @Override
     public String getDepName(Department department) {
         return departmentStorage.getDepName(department);
-    }
-
-    @Override
-    public Long getDepId(Department department) {
-        return departmentStorage.getDepId (department);
     }
 
     @Override

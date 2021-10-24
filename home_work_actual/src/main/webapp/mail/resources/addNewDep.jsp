@@ -7,7 +7,7 @@
 
 <body>
 
-        <form action="${pageContext.request.contextPath}/departmentActual?put_mode="${put_mode} method="POST">
+        <form action="${pageContext.request.contextPath}/departmentActual" method="POST">
          <c:if test="${put_mode eq 'update'}"><tr align="center"><td>
            ID (обязательное поле):<br>
            <input type="text" name="id"><br>
@@ -21,12 +21,13 @@
             <td>
             ID родительского отдела:<br>
             <input type="text" name="parId">
+            <input type="hidden" name="put_mode" value="${put_mode}">
             </td>
         </tr>
 
 
 <tr align="center"><td><br>
-<input type="submit" value="Добавить отдел" style="width:50%"><br><br>
+<input type="submit" value="${title}" style="width:50%"><br><br>
 </td></tr>
 
         </form>

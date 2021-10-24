@@ -3,11 +3,17 @@ package by.it_academy.service.hibernate;/* created by Kaminskii Ivan
 
 import by.it_academy.model.Position;
 import by.it_academy.service.api.IPositionService;
+import by.it_academy.storage.hibernate.PositionStorageH;
 
 import java.util.Collection;
 
 public class PositionServiceH implements IPositionService {
     private static final PositionServiceH instance = new PositionServiceH();
+    private final PositionStorageH positionStorageH;
+
+    public PositionServiceH() {
+        this.positionStorageH = PositionStorageH.getInstance();
+    }
 
     public static PositionServiceH getInstance() {
         return instance;
@@ -15,41 +21,39 @@ public class PositionServiceH implements IPositionService {
 
     @Override
     public Long putPosition(Position position) {
-        return null;
+        return positionStorageH.putPosition(position);
     }
 
     @Override
     public Long updatePosition(Position position) {
-        return null;
+        return positionStorageH.updatePosition(position);
     }
 
     @Override
     public Position getPosition(Long id) {
-        return null;
+        return positionStorageH.getPosition(id);
     }
 
     @Override
     public Collection<Position> getAllPosition(Long limit, Long offset) {
-        return null;
+        return positionStorageH.getAllPosition(limit, offset);
     }
 
     @Override
     public String getPosName(Position position) {
-        return null;
-    }
-
-    @Override
-    public Long getPosId(Position position) {
-        return null;
+        return positionStorageH.getPosName(position);
     }
 
     @Override
     public Long getOffset(Long page, Long limit) {
-        return null;
+        if (page == 0) {
+            return page;
+        }
+        return (page - 1L) * limit;
     }
 
     @Override
     public Long getMaxPage(Long limit) {
-        return null;
+        return positionStorageH.getMaxPage(limit);
     }
 }

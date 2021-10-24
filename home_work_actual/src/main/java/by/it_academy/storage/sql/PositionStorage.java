@@ -111,27 +111,6 @@ public class PositionStorage implements IPositionStorage {
     }
 
     @Override
-    public Long getPosId(Position position) {
-        Long id;
-        if (position.getId() != null) {
-            id = position.getId();
-        } else if (position.getName() != null) {
-            try (Connection connection = dbInitializer.getCpds().getConnection()) {
-                Statement statement = connection.createStatement();
-                try (ResultSet resultSet = statement.executeQuery("SELECT id FROM application.positions WHERE name=" + position.getName())) {
-                    resultSet.next();
-                    id = resultSet.getLong(1);
-                }
-            } catch (SQLException e) {
-                throw new IllegalStateException("Ошибка получения ID", e);
-            }
-        } else {
-            throw new IllegalArgumentException("Не задано обязательного условия для получения ID -POS");
-        }
-        return id;
-    }
-
-    @Override
     public Long getMaxPage(Long limit) {
         long maxPage = 0L;
         try (Connection connection = dbInitializer.getCpds().getConnection(); Statement statement = connection.createStatement()) {

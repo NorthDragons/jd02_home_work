@@ -2,26 +2,23 @@ package by.it_academy.test;/* created by Kaminskii Ivan
  */
 
 import by.it_academy.model.Employee;
+import by.it_academy.storage.hibernate.EmployeeStorageH;
 import by.it_academy.storage.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
+import org.hibernate.Transaction;
 
 public class Main {
     private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    public static void main(String[] args) {
-        Session session = sessionFactory.openSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-        cq.select(cb.count(cq.from(Employee.class)));
-        final Long count = session.createQuery(cq).getSingleResult();
+    private static final EmployeeStorageH employeeStorageH = EmployeeStorageH.getInstance();
 
-        System.out.println(count);
+    public static void main(String[] args) {
+        Employee employee = employeeStorageH.getEmployee(18L);
+        employee.setSalary(66.88);
+        employee.setName("testUpdate");
+
+        final Long id = employeeStorageH.updateEmployer(employee);
+        System.out.println(employeeStorageH.getEmployee(id).toString());
 
 
 //        EmployeeFindBySalary employeeFindBySalary = new EmployeeFindBySalary();
@@ -44,6 +41,29 @@ public class Main {
 //
 //        final Long id = saverTest.putEmployee(employee);
 //        System.out.println(id);
+    }
+
+    private static void update(Employee employee) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.clear();
+        final Transaction transaction = session.beginTransaction();
+        final Employee updateEmp = session.get(Employee.class, employee.getId());
+        if (updateEmp == null) {
+            throw new IllegalStateException("Не найдено пользователя с ID:" + employee.getId());
+        } else {
+            if (employee.getName() != null && !(employee.getName().isBlank())) {
+                updateEmp.setName(employee.getName());
+            } else if (employee.getDepartment() != null) {
+                updateEmp.setDepartment(employee.getDepartment());
+            } else if (employee.getPosition() != null) {
+                updateEmp.setPosition(employee.getPosition());
+            } else if (employee.getSalary() != null) {
+                updateEmp.setSalary(employee.getSalary());
+            }
+            session.update(updateEmp);
+            transaction.commit();
+            session.close();
+        }
     }
 }
 
