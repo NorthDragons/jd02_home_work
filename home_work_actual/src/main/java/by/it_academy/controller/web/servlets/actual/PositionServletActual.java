@@ -69,18 +69,30 @@ public class PositionServletActual extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String put_mode = req.getParameter("put_mode");
+        String name = req.getParameter("name");
+        Long posId = Long.valueOf(req.getParameter("id"));
+        Position position;
         switch (put_mode) {
             case ("add"):
-                String name = req.getParameter("name");
-                Position position = new Position();
+                position = new Position();
                 position.setName(name);
-                Long posId = positionService.putPosition(position);
-                resp.sendRedirect(req.getContextPath() + "/positionActual?get_mode=one&id=" + posId);
+                posId = positionService.putPosition(position);
                 break;
             case ("update"):
+
+
+                position = positionService.getPosition(posId);
+                if (position == null) {
+                    throw new IllegalStateException("Должность с ID: " + posId + " не найдена");
+                }
+                if (!name.isBlank()) {
+                    position.setName(name);
+                }
+                posId = positionService.updatePosition(position);
                 break;
             default:
                 throw new IllegalStateException("Не определён put_mode");
         }
+        resp.sendRedirect(req.getContextPath() + "/positionActual?get_mode=one&id=" + posId);
     }
 }

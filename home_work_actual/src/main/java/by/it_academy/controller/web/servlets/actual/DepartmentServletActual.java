@@ -90,13 +90,13 @@ public class DepartmentServletActual extends HttpServlet {
             case ("update"):
                 Long id = Long.valueOf(req.getParameter("id"));
                 department = departmentService.getDepartment(id);
-                if(department==null){
-                    throw new IllegalStateException("Отдел с ID:"+id+" - не найден");
+                if (department == null) {
+                    throw new IllegalStateException("Отдел с ID:" + id + " - не найден");
                 }
                 if (!parentId.isBlank()) {
                     parId = Long.parseLong(parentId);
                 }
-                if(!name.isBlank()){
+                if (!name.isBlank()) {
                     department.setName(name);
                 }
                 depId = departmentService.updateDepartment(department, parId);

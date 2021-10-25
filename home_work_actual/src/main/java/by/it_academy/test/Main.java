@@ -2,23 +2,23 @@ package by.it_academy.test;/* created by Kaminskii Ivan
  */
 
 import by.it_academy.model.Employee;
+import by.it_academy.model.Position;
 import by.it_academy.storage.hibernate.EmployeeStorageH;
 import by.it_academy.storage.hibernate.HibernateUtil;
+import by.it_academy.storage.hibernate.PositionStorageH;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class Main {
     private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    private static final EmployeeStorageH employeeStorageH = EmployeeStorageH.getInstance();
+    private static final PositionStorageH positionStorageH = PositionStorageH.getInstance();
 
     public static void main(String[] args) {
-        Employee employee = employeeStorageH.getEmployee(18L);
-        employee.setSalary(66.88);
-        employee.setName("testUpdate");
-
-        final Long id = employeeStorageH.updateEmployer(employee);
-        System.out.println(employeeStorageH.getEmployee(id).toString());
+        Position position= new Position();
+        position.setName("testAdd");
+        final Long aLong = positionStorageH.putPosition(position);
+        System.out.println(aLong);
 
 
 //        EmployeeFindBySalary employeeFindBySalary = new EmployeeFindBySalary();

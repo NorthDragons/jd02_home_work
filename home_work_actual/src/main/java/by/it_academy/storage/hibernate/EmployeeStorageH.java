@@ -74,11 +74,11 @@ public class EmployeeStorageH implements IEmployerStorage {
     @Override
     public Long getMaxPage(Long limit) {
         Session session = sessionFactory.openSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-        cq.select(cb.count(cq.from(Employee.class)));
-        float aFloat = ((float) session.createQuery(cq).getSingleResult() / (float) limit);
-        return (Long) (long) Math.ceil(aFloat);
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(Employee.class)));
+        float aFloat = ((float) session.createQuery(criteriaQuery).getSingleResult() / (float) limit);
+        return (long) Math.ceil(aFloat);
     }
 
     public static EmployeeStorageH getInstance() {

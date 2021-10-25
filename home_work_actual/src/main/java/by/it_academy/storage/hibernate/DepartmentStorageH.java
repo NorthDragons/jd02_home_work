@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class DepartmentStorageH implements IDepartmentStorage {
@@ -38,17 +37,13 @@ public class DepartmentStorageH implements IDepartmentStorage {
     public Long updateDepartment(Department department, Long parId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            if (department == null) {
-                throw new IllegalStateException("Не найден отдел с таким ID");
-            } else {
-                if (parId != 0L) {
-                    Department parentDep = session.get(Department.class, parId);
-                    department.setParent_dep(parentDep);
-                }
-                session.update(department);
-
-                transaction.commit();
+            if (parId != 0L) {
+                Department parentDep = session.get(Department.class, parId);
+                department.setParent_dep(parentDep);
             }
+            session.update(department);
+
+            transaction.commit();
         }
         return department.getId();
     }
@@ -88,6 +83,7 @@ public class DepartmentStorageH implements IDepartmentStorage {
             try (Session session = sessionFactory.openSession()) {
                 Transaction transaction = session.beginTransaction();
                 final Department department1 = session.get(Department.class, department.getId());
+                transaction.commit();
                 return department1.getName();
             }
         } else {
@@ -97,7 +93,15 @@ public class DepartmentStorageH implements IDepartmentStorage {
 
     @Override
     public Long getMaxPage(Long limit) {
-        return null;
+        try (Session session = sessionFactory.openSession()) {
+            final Transaction transaction = session.beginTransaction();
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+            criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(Department.class)));
+            float aFloat = ((float) session.createQuery(criteriaQuery).getSingleResult() / (float) limit);
+            transaction.commit();
+            return (long) Math.ceil(aFloat);
+        }
     }
 
     public static DepartmentStorageH getInstance() {
