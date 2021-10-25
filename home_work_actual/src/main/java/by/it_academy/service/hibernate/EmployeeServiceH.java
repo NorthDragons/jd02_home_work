@@ -54,21 +54,13 @@ public class EmployeeServiceH implements IEmployerService {
     }
 
     @Override
-    public Collection<Employee> getAllEmp(Long limit, Long offset) {
-        return employeeStorageH.getAllEmployers(limit, offset);
+    public Collection<Employee> getAllEmp(Long limit, Long page) {
+        return employeeStorageH.getAllEmployers(limit, page);
     }
 
     @Override
     public Employee getEmp(Long id) {
         return employeeStorageH.getEmployee(id);
-    }
-
-    @Override
-    public Long getOffset(Long page, Long limit) {
-        if (page == 0) {
-            return page;
-        }
-        return (page - 1L) * limit;
     }
 
     @Override

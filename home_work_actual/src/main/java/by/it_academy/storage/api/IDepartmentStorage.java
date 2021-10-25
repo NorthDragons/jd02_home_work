@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IDepartmentStorage {
-    Long putDepartment(Department name, Long parentId);
+    Long putDepartment(Department page, Long parentId);
 
-    Long updateDepartment(Department name, Long parId);
+    Long updateDepartment(Department page, Long parId);
 
-    Collection<Department> getAllDepartment(Long limit, Long offset);
+    Collection<Department> getAllDepartment(Long limit, Long page);
 
     Department getDepartment(Long id);
 

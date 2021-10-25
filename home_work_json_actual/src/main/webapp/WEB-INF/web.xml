@@ -1,0 +1,26 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>mailerActual</display-name>
+
+    <welcome-file-list>
+        <welcome-file>mail/hello.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <context-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
+
+
+
+    <context-param>
+        <param-name>service_mod</param-name>
+        <param-value>HIBERNATE</param-value>
+    </context-param>
+
+</web-app>
