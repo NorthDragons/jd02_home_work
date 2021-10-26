@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.it-academy</groupId>
-    <artifactId>home_work_json</artifactId>
+    <artifactId>home_work_json_actual</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
