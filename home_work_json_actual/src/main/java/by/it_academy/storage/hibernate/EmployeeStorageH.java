@@ -23,12 +23,13 @@ public class EmployeeStorageH implements IEmployerStorage {
 
     @Override
     public Long putEmployer(Employee employee) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(employee);
-        transaction.commit();
-        session.close();
-        return employee.getId();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.save(employee);
+            transaction.commit();
+            session.close();
+            return employee.getId();
+        }
     }
 
     @Override
@@ -61,28 +62,30 @@ public class EmployeeStorageH implements IEmployerStorage {
         if (page > 0) {
             offset = (page - 1L) * limit;
         }
-        final Session session = sessionFactory.openSession();
-        final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        final CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
-        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        try (Session session = sessionFactory.openSession()) {
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+            Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
 
-        criteriaQuery.select(employeeRoot).orderBy(criteriaBuilder.asc(employeeRoot.get("id")));
-        final Query<Employee> query = session.createQuery(criteriaQuery);
-        query.setFirstResult(Math.toIntExact(offset));
-        query.setMaxResults(Math.toIntExact(limit));
-        List<Employee> employees = query.list();
-        session.close();
-        return employees;
+            criteriaQuery.select(employeeRoot).orderBy(criteriaBuilder.asc(employeeRoot.get("id")));
+            final Query<Employee> query = session.createQuery(criteriaQuery);
+            query.setFirstResult(Math.toIntExact(offset));
+            query.setMaxResults(Math.toIntExact(limit));
+            List<Employee> employees = query.list();
+            session.close();
+            return employees;
+        }
     }
 
     @Override
     public Long getMaxPage(Long limit) {
-        Session session = sessionFactory.openSession();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(Employee.class)));
-        float aFloat = ((float) session.createQuery(criteriaQuery).getSingleResult() / (float) limit);
-        return (long) Math.ceil(aFloat);
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+            criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(Employee.class)));
+            float aFloat = ((float) session.createQuery(criteriaQuery).getSingleResult() / (float) limit);
+            return (long) Math.ceil(aFloat);
+        }
     }
 
     public static EmployeeStorageH getInstance() {
